@@ -4,9 +4,9 @@ Suite Setup    TWI_Open_Port    Port Number=COM3    Encoding=hexlify    Buad Rat
 Suite Teardown    TWI_Close_Port    Port Number=COM3
 *** Test Cases ***
 Test Case 1
-    Set HIGH   Port Number=COM31    featNum=2    attrNum=6
+    Set HIGH   Port Number=COM3    featNum=2    attrNum=6
     sleep   5
-    Set LOW   Port Number=COM31    featNum=2    attrNum=6
+    Set LOW   Port Number=COM3    featNum=2    attrNum=6
     sleep   5
 
 
