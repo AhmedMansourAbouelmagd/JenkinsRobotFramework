@@ -1,2 +1,2 @@
-cd /d D:\Repos\Automated-Testing\robotframework-seriallibrary-develop\robotframework-seriallibrary-develop
+cd /d D:\JenkinsWorkspace\RobotFramework\robotframework-seriallibrary-develop
 robot tests\Test_uart_RHP.robot
