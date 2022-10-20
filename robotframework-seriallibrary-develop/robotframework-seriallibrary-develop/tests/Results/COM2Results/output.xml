@@ -1,0 +1,727 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.8.1 on win32)" generated="20220825 13:06:28.963" rpa="false" schemaversion="3">
+<suite id="s1" name="Tests" source="C:\Users\mohamed.wagdy\Downloads\robotframework-seriallibrary-develop (1)\robotframework-seriallibrary-develop\tests">
+<suite id="s1-s1" name="Test TWI Serial library" source="C:\Users\mohamed.wagdy\Downloads\robotframework-seriallibrary-develop (1)\robotframework-seriallibrary-develop\tests\Test_TWI_Serial_library.robot">
+<test id="s1-s1-t1" name="TEST_No_Port_Opened" line="17">
+<kw name="Get Library Instance" library="BuiltIn">
+<var>${ins}</var>
+<arg>SerialLibrary</arg>
+<doc>Returns the currently active instance of the specified library.</doc>
+<msg timestamp="20220825 13:06:29.027" level="INFO">${ins} = &lt;SerialLibrary.SerialLibrary object at 0x04B48D18&gt;</msg>
+<status status="PASS" starttime="20220825 13:06:29.027" endtime="20220825 13:06:29.027"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${ins._current_port_locator}</arg>
+<arg>${NONE}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220825 13:06:29.027" endtime="20220825 13:06:29.028"/>
+</kw>
+<status status="PASS" starttime="20220825 13:06:29.026" endtime="20220825 13:06:29.029"/>
+</test>
+<test id="s1-s1-t2" name="Test_Open_Port_Sucssesfully" line="26">
+<kw name="TWI_Open_Port" library="TWI_Serial_library">
+<var>${PortConfigurations}</var>
+<arg>Port Number=${Port Number}</arg>
+<doc>Sets configurations(Port Number,Buad Rate,Encoding and Timeout)
+And Opens passed port</doc>
+<kw name="Add Port" library="SerialLibrary">
+<var>${PortConfigurations}</var>
+<arg>port_locator=${Port Number}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Adds new port with specified locator.</doc>
+<msg timestamp="20220825 13:06:29.034" level="INFO">${PortConfigurations} = Serial&lt;id=0x4bde028, open=True&gt;(port='COM2', baudrate=9600, bytesize=8, parity='N', stopbits=1, timeout=10.0, xonxoff=False, rtscts=False, dsrdtr=False)</msg>
+<status status="PASS" starttime="20220825 13:06:29.031" endtime="20220825 13:06:29.034"/>
+</kw>
+<kw name="Port Should Be Open" library="SerialLibrary">
+<arg>${Port Number}</arg>
+<doc>Fails if specified port is closed.</doc>
+<status status="PASS" starttime="20220825 13:06:29.034" endtime="20220825 13:06:29.034"/>
+</kw>
+<kw name="Set Port Parameter" library="SerialLibrary">
+<arg>param_name=baudrate</arg>
+<arg>value=${Buad Rate}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Sets port parameter.</doc>
+<status status="PASS" starttime="20220825 13:06:29.034" endtime="20220825 13:06:29.036"/>
+</kw>
+<kw name="Set Encoding" library="SerialLibrary">
+<arg>encoding=${Encoding}</arg>
+<doc>Sets default encoding for the library instance.</doc>
+<status status="PASS" starttime="20220825 13:06:29.036" endtime="20220825 13:06:29.036"/>
+</kw>
+<msg timestamp="20220825 13:06:29.036" level="INFO">${PortConfigurations} = Serial&lt;id=0x4bde028, open=True&gt;(port='COM2', baudrate=9600, bytesize=8, parity='N', stopbits=1, timeout=10.0, xonxoff=False, rtscts=False, dsrdtr=False)</msg>
+<status status="PASS" starttime="20220825 13:06:29.030" endtime="20220825 13:06:29.036"/>
+</kw>
+<kw name="Get Library Instance" library="BuiltIn">
+<var>${ins}</var>
+<arg>SerialLibrary</arg>
+<doc>Returns the currently active instance of the specified library.</doc>
+<msg timestamp="20220825 13:06:29.036" level="INFO">${ins} = &lt;SerialLibrary.SerialLibrary object at 0x04B48D18&gt;</msg>
+<status status="PASS" starttime="20220825 13:06:29.036" endtime="20220825 13:06:29.036"/>
+</kw>
+<kw name="Get Current Port Locator" library="SerialLibrary">
+<var>${locator}</var>
+<doc>Returns port locator of current port.
+If no port is associated to the current port (implies no port
+in the library instance), None is returned.</doc>
+<msg timestamp="20220825 13:06:29.037" level="INFO">${locator} = COM2</msg>
+<status status="PASS" starttime="20220825 13:06:29.037" endtime="20220825 13:06:29.037"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${ins._current_port_locator}</arg>
+<arg>${Port Number}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220825 13:06:29.037" endtime="20220825 13:06:29.038"/>
+</kw>
+<kw name="TWI_Close_Port" library="TWI_Serial_library" type="TEARDOWN">
+<arg>Port Number=${Port Number}</arg>
+<doc>Deletes (Closes) passed port</doc>
+<kw name="Delete Port" library="SerialLibrary">
+<arg>${Port Number}</arg>
+<doc>Deletes specified port.</doc>
+<status status="PASS" starttime="20220825 13:06:29.038" endtime="20220825 13:06:29.039"/>
+</kw>
+<status status="PASS" starttime="20220825 13:06:29.038" endtime="20220825 13:06:29.039"/>
+</kw>
+<tag>Functional</tag>
+<tag>smoke</tag>
+<status status="PASS" starttime="20220825 13:06:29.029" endtime="20220825 13:06:29.039"/>
+</test>
+<test id="s1-s1-t3" name="Test_Set_BuadRate_Sucssesfully" line="42">
+<kw name="TWI_Open_Port" library="TWI_Serial_library">
+<arg>Port Number=${Port Number}</arg>
+<arg>Buad Rate=${Buad Rate}</arg>
+<doc>Sets configurations(Port Number,Buad Rate,Encoding and Timeout)
+And Opens passed port</doc>
+<kw name="Add Port" library="SerialLibrary">
+<var>${PortConfigurations}</var>
+<arg>port_locator=${Port Number}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Adds new port with specified locator.</doc>
+<msg timestamp="20220825 13:06:29.044" level="INFO">${PortConfigurations} = Serial&lt;id=0x4bde640, open=True&gt;(port='COM2', baudrate=9600, bytesize=8, parity='N', stopbits=1, timeout=10.0, xonxoff=False, rtscts=False, dsrdtr=False)</msg>
+<status status="PASS" starttime="20220825 13:06:29.041" endtime="20220825 13:06:29.044"/>
+</kw>
+<kw name="Port Should Be Open" library="SerialLibrary">
+<arg>${Port Number}</arg>
+<doc>Fails if specified port is closed.</doc>
+<status status="PASS" starttime="20220825 13:06:29.044" endtime="20220825 13:06:29.044"/>
+</kw>
+<kw name="Set Port Parameter" library="SerialLibrary">
+<arg>param_name=baudrate</arg>
+<arg>value=${Buad Rate}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Sets port parameter.</doc>
+<status status="PASS" starttime="20220825 13:06:29.044" endtime="20220825 13:06:29.045"/>
+</kw>
+<kw name="Set Encoding" library="SerialLibrary">
+<arg>encoding=${Encoding}</arg>
+<doc>Sets default encoding for the library instance.</doc>
+<status status="PASS" starttime="20220825 13:06:29.045" endtime="20220825 13:06:29.046"/>
+</kw>
+<status status="PASS" starttime="20220825 13:06:29.040" endtime="20220825 13:06:29.046"/>
+</kw>
+<kw name="Get Port Parameter" library="SerialLibrary">
+<var>${baudrate}</var>
+<arg>baudrate</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Returns specified parameter of the port.</doc>
+<msg timestamp="20220825 13:06:29.047" level="INFO">${baudrate} = 115200</msg>
+<status status="PASS" starttime="20220825 13:06:29.046" endtime="20220825 13:06:29.047"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${baudrate}</arg>
+<arg>${Buad Rate}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20220825 13:06:29.047" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20220825 13:06:29.047" endtime="20220825 13:06:29.047"/>
+</kw>
+<kw name="TWI_Close_Port" library="TWI_Serial_library">
+<arg>Port Number=${Port Number}</arg>
+<doc>Deletes (Closes) passed port</doc>
+<kw name="Delete Port" library="SerialLibrary">
+<arg>${Port Number}</arg>
+<doc>Deletes specified port.</doc>
+<status status="PASS" starttime="20220825 13:06:29.048" endtime="20220825 13:06:29.048"/>
+</kw>
+<status status="PASS" starttime="20220825 13:06:29.047" endtime="20220825 13:06:29.048"/>
+</kw>
+<tag>Functional</tag>
+<status status="PASS" starttime="20220825 13:06:29.040" endtime="20220825 13:06:29.048"/>
+</test>
+<test id="s1-s1-t4" name="Test_Set_Encoding_Type_Sucssesfully" line="52">
+<kw name="TWI_Open_Port" library="TWI_Serial_library">
+<arg>Port Number=${Port Number}</arg>
+<arg>Buad Rate=${Buad Rate}</arg>
+<arg>Encoding=${Encoding}</arg>
+<arg>timeout=10</arg>
+<doc>Sets configurations(Port Number,Buad Rate,Encoding and Timeout)
+And Opens passed port</doc>
+<kw name="Add Port" library="SerialLibrary">
+<var>${PortConfigurations}</var>
+<arg>port_locator=${Port Number}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Adds new port with specified locator.</doc>
+<msg timestamp="20220825 13:06:29.052" level="INFO">${PortConfigurations} = Serial&lt;id=0x4be2028, open=True&gt;(port='COM2', baudrate=9600, bytesize=8, parity='N', stopbits=1, timeout=10.0, xonxoff=False, rtscts=False, dsrdtr=False)</msg>
+<status status="PASS" starttime="20220825 13:06:29.050" endtime="20220825 13:06:29.052"/>
+</kw>
+<kw name="Port Should Be Open" library="SerialLibrary">
+<arg>${Port Number}</arg>
+<doc>Fails if specified port is closed.</doc>
+<status status="PASS" starttime="20220825 13:06:29.052" endtime="20220825 13:06:29.053"/>
+</kw>
+<kw name="Set Port Parameter" library="SerialLibrary">
+<arg>param_name=baudrate</arg>
+<arg>value=${Buad Rate}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Sets port parameter.</doc>
+<status status="PASS" starttime="20220825 13:06:29.053" endtime="20220825 13:06:29.054"/>
+</kw>
+<kw name="Set Encoding" library="SerialLibrary">
+<arg>encoding=${Encoding}</arg>
+<doc>Sets default encoding for the library instance.</doc>
+<status status="PASS" starttime="20220825 13:06:29.054" endtime="20220825 13:06:29.054"/>
+</kw>
+<status status="PASS" starttime="20220825 13:06:29.049" endtime="20220825 13:06:29.054"/>
+</kw>
+<kw name="Get Encoding" library="SerialLibrary">
+<var>${encoding}</var>
+<doc>Returns default encoding for the library instance.</doc>
+<msg timestamp="20220825 13:06:29.055" level="INFO">${encoding} = hexlify</msg>
+<status status="PASS" starttime="20220825 13:06:29.054" endtime="20220825 13:06:29.055"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${encoding}</arg>
+<arg>${Encoding}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220825 13:06:29.055" endtime="20220825 13:06:29.055"/>
+</kw>
+<kw name="TWI_Close_Port" library="TWI_Serial_library">
+<arg>Port Number=${Port Number}</arg>
+<doc>Deletes (Closes) passed port</doc>
+<kw name="Delete Port" library="SerialLibrary">
+<arg>${Port Number}</arg>
+<doc>Deletes specified port.</doc>
+<status status="PASS" starttime="20220825 13:06:29.056" endtime="20220825 13:06:29.056"/>
+</kw>
+<status status="PASS" starttime="20220825 13:06:29.055" endtime="20220825 13:06:29.056"/>
+</kw>
+<tag>Functional</tag>
+<status status="PASS" starttime="20220825 13:06:29.049" endtime="20220825 13:06:29.056"/>
+</test>
+<test id="s1-s1-t5" name="Test_Set_Timeout_Sucssesfully" line="59">
+<kw name="TWI_Open_Port" library="TWI_Serial_library">
+<arg>Port Number=${Port Number}</arg>
+<arg>Buad Rate=${Buad Rate}</arg>
+<arg>Encoding=${Encoding}</arg>
+<arg>timeout=${Time out}</arg>
+<doc>Sets configurations(Port Number,Buad Rate,Encoding and Timeout)
+And Opens passed port</doc>
+<kw name="Add Port" library="SerialLibrary">
+<var>${PortConfigurations}</var>
+<arg>port_locator=${Port Number}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Adds new port with specified locator.</doc>
+<msg timestamp="20220825 13:06:29.060" level="INFO">${PortConfigurations} = Serial&lt;id=0x4be2910, open=True&gt;(port='COM2', baudrate=9600, bytesize=8, parity='N', stopbits=1, timeout=50.0, xonxoff=False, rtscts=False, dsrdtr=False)</msg>
+<status status="PASS" starttime="20220825 13:06:29.058" endtime="20220825 13:06:29.060"/>
+</kw>
+<kw name="Port Should Be Open" library="SerialLibrary">
+<arg>${Port Number}</arg>
+<doc>Fails if specified port is closed.</doc>
+<status status="PASS" starttime="20220825 13:06:29.060" endtime="20220825 13:06:29.061"/>
+</kw>
+<kw name="Set Port Parameter" library="SerialLibrary">
+<arg>param_name=baudrate</arg>
+<arg>value=${Buad Rate}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Sets port parameter.</doc>
+<status status="PASS" starttime="20220825 13:06:29.061" endtime="20220825 13:06:29.062"/>
+</kw>
+<kw name="Set Encoding" library="SerialLibrary">
+<arg>encoding=${Encoding}</arg>
+<doc>Sets default encoding for the library instance.</doc>
+<status status="PASS" starttime="20220825 13:06:29.062" endtime="20220825 13:06:29.062"/>
+</kw>
+<status status="PASS" starttime="20220825 13:06:29.057" endtime="20220825 13:06:29.063"/>
+</kw>
+<kw name="Get Port Parameter" library="SerialLibrary">
+<var>${timeout}</var>
+<arg>timeout</arg>
+<doc>Returns specified parameter of the port.</doc>
+<msg timestamp="20220825 13:06:29.063" level="INFO">${timeout} = 50.0</msg>
+<status status="PASS" starttime="20220825 13:06:29.063" endtime="20220825 13:06:29.063"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${timeout}</arg>
+<arg>${Time out}</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="PASS" starttime="20220825 13:06:29.063" endtime="20220825 13:06:29.063"/>
+</kw>
+<kw name="TWI_Close_Port" library="TWI_Serial_library">
+<arg>Port Number=${Port Number}</arg>
+<doc>Deletes (Closes) passed port</doc>
+<kw name="Delete Port" library="SerialLibrary">
+<arg>${Port Number}</arg>
+<doc>Deletes specified port.</doc>
+<status status="PASS" starttime="20220825 13:06:29.064" endtime="20220825 13:06:29.064"/>
+</kw>
+<status status="PASS" starttime="20220825 13:06:29.063" endtime="20220825 13:06:29.064"/>
+</kw>
+<tag>Functional</tag>
+<status status="PASS" starttime="20220825 13:06:29.057" endtime="20220825 13:06:29.064"/>
+</test>
+<test id="s1-s1-t6" name="Nordic_Board_Is_Waked_Up" line="69">
+<kw name="TWI_Open_Port" library="TWI_Serial_library">
+<arg>Port Number=${Port Number}</arg>
+<arg>Buad Rate=${Buad Rate}</arg>
+<arg>Encoding=${Encoding}</arg>
+<arg>timeout=${Time out}</arg>
+<doc>Sets configurations(Port Number,Buad Rate,Encoding and Timeout)
+And Opens passed port</doc>
+<kw name="Add Port" library="SerialLibrary">
+<var>${PortConfigurations}</var>
+<arg>port_locator=${Port Number}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Adds new port with specified locator.</doc>
+<msg timestamp="20220825 13:06:29.068" level="INFO">${PortConfigurations} = Serial&lt;id=0x4bde3e8, open=True&gt;(port='COM2', baudrate=9600, bytesize=8, parity='N', stopbits=1, timeout=50.0, xonxoff=False, rtscts=False, dsrdtr=False)</msg>
+<status status="PASS" starttime="20220825 13:06:29.066" endtime="20220825 13:06:29.069"/>
+</kw>
+<kw name="Port Should Be Open" library="SerialLibrary">
+<arg>${Port Number}</arg>
+<doc>Fails if specified port is closed.</doc>
+<status status="PASS" starttime="20220825 13:06:29.069" endtime="20220825 13:06:29.069"/>
+</kw>
+<kw name="Set Port Parameter" library="SerialLibrary">
+<arg>param_name=baudrate</arg>
+<arg>value=${Buad Rate}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Sets port parameter.</doc>
+<status status="PASS" starttime="20220825 13:06:29.069" endtime="20220825 13:06:29.070"/>
+</kw>
+<kw name="Set Encoding" library="SerialLibrary">
+<arg>encoding=${Encoding}</arg>
+<doc>Sets default encoding for the library instance.</doc>
+<status status="PASS" starttime="20220825 13:06:29.070" endtime="20220825 13:06:29.070"/>
+</kw>
+<status status="PASS" starttime="20220825 13:06:29.065" endtime="20220825 13:06:29.070"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${message}</var>
+<arg>${BLUE} "\\nPlease Press on Reset Button you have 10 seconds"</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20220825 13:06:29.071" level="INFO">${message} = [34m
+Please Press on Reset Button you have 10 seconds</msg>
+<status status="PASS" starttime="20220825 13:06:29.071" endtime="20220825 13:06:29.071"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${message}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220825 13:06:29.071" endtime="20220825 13:06:29.071"/>
+</kw>
+<kw name="TWI_read_Bytes" library="TWI_Serial_library">
+<var>${Actual}</var>
+<arg>terminator=:</arg>
+<arg>Port Number=${Port Number}</arg>
+<arg>Encoding=ascii</arg>
+<arg>size=10</arg>
+<arg>terminator_encoding=ascii</arg>
+<doc>TWI KeyWord ,It reads Number of Bytes on the serial port untill detect passed terminator or passed size
+paramaters: Port Number -&gt; which port will write the data on
+size -&gt; number of bytes will be recieved
+Encoding -&gt; Encoding type (ascii,utf-8)
+terminator -&gt; reading is terminated when found in recieved bytes
+returns readed data</doc>
+<kw name="Read Until" library="SerialLibrary">
+<var>${Readdata}</var>
+<arg>terminator=${terminator}</arg>
+<arg>terminator_encoding=${terminator_encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<arg>size=${size}</arg>
+<arg>encoding=${Encoding}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20220825 13:06:37.132" level="INFO">${Readdata} = 
+Start:</msg>
+<status status="PASS" starttime="20220825 13:06:29.072" endtime="20220825 13:06:37.132"/>
+</kw>
+<msg timestamp="20220825 13:06:37.132" level="INFO">${Actual} = 
+Start:</msg>
+<status status="PASS" starttime="20220825 13:06:29.071" endtime="20220825 13:06:37.132"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>first=${Actual}</arg>
+<arg>second=Start:</arg>
+<arg>strip_spaces=True</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220825 13:06:37.133" endtime="20220825 13:06:37.133"/>
+</kw>
+<kw name="TWI_Close_Port" library="TWI_Serial_library">
+<arg>${Port Number}</arg>
+<doc>Deletes (Closes) passed port</doc>
+<kw name="Delete Port" library="SerialLibrary">
+<arg>${Port Number}</arg>
+<doc>Deletes specified port.</doc>
+<status status="PASS" starttime="20220825 13:06:37.133" endtime="20220825 13:06:37.134"/>
+</kw>
+<status status="PASS" starttime="20220825 13:06:37.133" endtime="20220825 13:06:37.134"/>
+</kw>
+<tag>Power on</tag>
+<status status="PASS" starttime="20220825 13:06:29.065" endtime="20220825 13:06:37.134"/>
+</test>
+<test id="s1-s1-t7" name="Test_Send&amp;Recieve_One_Byte" line="83">
+<kw name="TWI_Open_Port" library="TWI_Serial_library">
+<var>${PortConfigurations}</var>
+<arg>Port Number=${Port Number}</arg>
+<arg>Buad Rate=${Buad Rate}</arg>
+<arg>Encoding=${Encoding}</arg>
+<doc>Sets configurations(Port Number,Buad Rate,Encoding and Timeout)
+And Opens passed port</doc>
+<kw name="Add Port" library="SerialLibrary">
+<var>${PortConfigurations}</var>
+<arg>port_locator=${Port Number}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Adds new port with specified locator.</doc>
+<msg timestamp="20220825 13:06:37.139" level="INFO">${PortConfigurations} = Serial&lt;id=0x4be28f8, open=True&gt;(port='COM2', baudrate=9600, bytesize=8, parity='N', stopbits=1, timeout=10.0, xonxoff=False, rtscts=False, dsrdtr=False)</msg>
+<status status="PASS" starttime="20220825 13:06:37.136" endtime="20220825 13:06:37.139"/>
+</kw>
+<kw name="Port Should Be Open" library="SerialLibrary">
+<arg>${Port Number}</arg>
+<doc>Fails if specified port is closed.</doc>
+<status status="PASS" starttime="20220825 13:06:37.139" endtime="20220825 13:06:37.140"/>
+</kw>
+<kw name="Set Port Parameter" library="SerialLibrary">
+<arg>param_name=baudrate</arg>
+<arg>value=${Buad Rate}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Sets port parameter.</doc>
+<status status="PASS" starttime="20220825 13:06:37.140" endtime="20220825 13:06:37.141"/>
+</kw>
+<kw name="Set Encoding" library="SerialLibrary">
+<arg>encoding=${Encoding}</arg>
+<doc>Sets default encoding for the library instance.</doc>
+<status status="PASS" starttime="20220825 13:06:37.141" endtime="20220825 13:06:37.141"/>
+</kw>
+<msg timestamp="20220825 13:06:37.141" level="INFO">${PortConfigurations} = Serial&lt;id=0x4be28f8, open=True&gt;(port='COM2', baudrate=115200, bytesize=8, parity='N', stopbits=1, timeout=10.0, xonxoff=False, rtscts=False, dsrdtr=False)</msg>
+<status status="PASS" starttime="20220825 13:06:37.135" endtime="20220825 13:06:37.141"/>
+</kw>
+<kw name="TWI_Write_Byte" library="TWI_Serial_library">
+<arg>Data=${ExpectedValue}</arg>
+<arg>Port Number=${Port Number}</arg>
+<arg>Encoding=${Encoding}</arg>
+<doc>TWI KeyWord ,It writes ONE Byte on the serial port
+paramaters: Data -&gt; paramarter will hold the data to be sent
+Port Number -&gt; which port will write the data on
+Encoding -&gt; Encoding type (ascii,utf-8)
+Number of Bytes -&gt; number of bytes will be send
+Returns none</doc>
+<kw name="Write Data" library="SerialLibrary">
+<arg>data=${Data}</arg>
+<arg>encoding=${Encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20220825 13:06:37.142" endtime="20220825 13:06:37.143"/>
+</kw>
+<status status="PASS" starttime="20220825 13:06:37.142" endtime="20220825 13:06:37.144"/>
+</kw>
+<kw name="TWI_read_Bytes" library="TWI_Serial_library">
+<var>${Actual}</var>
+<arg>${Port Number}</arg>
+<arg>size=1</arg>
+<doc>TWI KeyWord ,It reads Number of Bytes on the serial port untill detect passed terminator or passed size
+paramaters: Port Number -&gt; which port will write the data on
+size -&gt; number of bytes will be recieved
+Encoding -&gt; Encoding type (ascii,utf-8)
+terminator -&gt; reading is terminated when found in recieved bytes
+returns readed data</doc>
+<kw name="Read Until" library="SerialLibrary">
+<var>${Readdata}</var>
+<arg>terminator=${terminator}</arg>
+<arg>terminator_encoding=${terminator_encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<arg>size=${size}</arg>
+<arg>encoding=${Encoding}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20220825 13:06:37.145" level="INFO">${Readdata} = 49</msg>
+<status status="PASS" starttime="20220825 13:06:37.144" endtime="20220825 13:06:37.145"/>
+</kw>
+<msg timestamp="20220825 13:06:37.145" level="INFO">${Actual} = 49</msg>
+<status status="PASS" starttime="20220825 13:06:37.144" endtime="20220825 13:06:37.145"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${Actual}</arg>
+<arg>${ExpectedValue}</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="PASS" starttime="20220825 13:06:37.145" endtime="20220825 13:06:37.145"/>
+</kw>
+<kw name="TWI_Close_Port" library="TWI_Serial_library">
+<arg>${Port Number}</arg>
+<doc>Deletes (Closes) passed port</doc>
+<kw name="Delete Port" library="SerialLibrary">
+<arg>${Port Number}</arg>
+<doc>Deletes specified port.</doc>
+<status status="PASS" starttime="20220825 13:06:37.146" endtime="20220825 13:06:37.146"/>
+</kw>
+<status status="PASS" starttime="20220825 13:06:37.145" endtime="20220825 13:06:37.146"/>
+</kw>
+<tag>Send</tag>
+<status status="PASS" starttime="20220825 13:06:37.135" endtime="20220825 13:06:37.146"/>
+</test>
+<test id="s1-s1-t8" name="Test_Send&amp;Recieve_Stream_of_Bytes" line="92">
+<kw name="Create List" library="BuiltIn">
+<var>@{SendList}</var>
+<arg>${0x0F}</arg>
+<arg>2</arg>
+<arg>${0B1010}</arg>
+<arg>5</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220825 13:06:37.148" level="INFO">@{SendList} = [ 15 | 2 | 10 | 5 ]</msg>
+<status status="PASS" starttime="20220825 13:06:37.147" endtime="20220825 13:06:37.148"/>
+</kw>
+<kw name="TWI_Open_Port" library="TWI_Serial_library">
+<arg>Port Number=${Port Number}</arg>
+<arg>Buad Rate=${Buad Rate}</arg>
+<arg>Encoding=${Encoding}</arg>
+<doc>Sets configurations(Port Number,Buad Rate,Encoding and Timeout)
+And Opens passed port</doc>
+<kw name="Add Port" library="SerialLibrary">
+<var>${PortConfigurations}</var>
+<arg>port_locator=${Port Number}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Adds new port with specified locator.</doc>
+<msg timestamp="20220825 13:06:37.152" level="INFO">${PortConfigurations} = Serial&lt;id=0x4be2a18, open=True&gt;(port='COM2', baudrate=9600, bytesize=8, parity='N', stopbits=1, timeout=10.0, xonxoff=False, rtscts=False, dsrdtr=False)</msg>
+<status status="PASS" starttime="20220825 13:06:37.149" endtime="20220825 13:06:37.152"/>
+</kw>
+<kw name="Port Should Be Open" library="SerialLibrary">
+<arg>${Port Number}</arg>
+<doc>Fails if specified port is closed.</doc>
+<status status="PASS" starttime="20220825 13:06:37.152" endtime="20220825 13:06:37.152"/>
+</kw>
+<kw name="Set Port Parameter" library="SerialLibrary">
+<arg>param_name=baudrate</arg>
+<arg>value=${Buad Rate}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Sets port parameter.</doc>
+<status status="PASS" starttime="20220825 13:06:37.152" endtime="20220825 13:06:37.153"/>
+</kw>
+<kw name="Set Encoding" library="SerialLibrary">
+<arg>encoding=${Encoding}</arg>
+<doc>Sets default encoding for the library instance.</doc>
+<status status="PASS" starttime="20220825 13:06:37.153" endtime="20220825 13:06:37.153"/>
+</kw>
+<status status="PASS" starttime="20220825 13:06:37.148" endtime="20220825 13:06:37.154"/>
+</kw>
+<kw name="TWI_Write_Bytes" library="TWI_Serial_library">
+<arg>@{SendList}</arg>
+<arg>Port Number=${Port Number}</arg>
+<arg>Encoding=${Encoding}</arg>
+<arg>Number of Bytes=4</arg>
+<doc>TWI KeyWord ,It writes Number of Bytes on the serial port
+paramaters: Data -&gt; paramarter will hold the data to be sent
+Port Number -&gt; which port will write the data on
+Number of Bytes -&gt; number of bytes will be send
+Encoding -&gt; Encoding type (ascii,utf-8)
+Returns none</doc>
+<for flavor="IN RANGE">
+<var>${counter}</var>
+<value>0</value>
+<value>${Number of Bytes}</value>
+<iter>
+<var name="${counter}">0</var>
+<kw name="Get From List" library="Collections">
+<var>${listvalue}</var>
+<arg>list_=@{list}</arg>
+<arg>index=${counter}</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<msg timestamp="20220825 13:06:37.155" level="INFO">${listvalue} = 15</msg>
+<status status="PASS" starttime="20220825 13:06:37.154" endtime="20220825 13:06:37.155"/>
+</kw>
+<kw name="TWI_Write_Byte" library="TWI_Serial_library">
+<arg>Data= ${listvalue}</arg>
+<arg>Port Number=${Port Number}</arg>
+<arg>Encoding=${Encoding}</arg>
+<doc>TWI KeyWord ,It writes ONE Byte on the serial port
+paramaters: Data -&gt; paramarter will hold the data to be sent
+Port Number -&gt; which port will write the data on
+Encoding -&gt; Encoding type (ascii,utf-8)
+Number of Bytes -&gt; number of bytes will be send
+Returns none</doc>
+<kw name="Write Data" library="SerialLibrary">
+<arg>data=${Data}</arg>
+<arg>encoding=${Encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20220825 13:06:37.156" endtime="20220825 13:06:37.157"/>
+</kw>
+<status status="PASS" starttime="20220825 13:06:37.155" endtime="20220825 13:06:37.157"/>
+</kw>
+<status status="PASS" starttime="20220825 13:06:37.154" endtime="20220825 13:06:37.157"/>
+</iter>
+<iter>
+<var name="${counter}">1</var>
+<kw name="Get From List" library="Collections">
+<var>${listvalue}</var>
+<arg>list_=@{list}</arg>
+<arg>index=${counter}</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<msg timestamp="20220825 13:06:37.157" level="INFO">${listvalue} = 2</msg>
+<status status="PASS" starttime="20220825 13:06:37.157" endtime="20220825 13:06:37.157"/>
+</kw>
+<kw name="TWI_Write_Byte" library="TWI_Serial_library">
+<arg>Data= ${listvalue}</arg>
+<arg>Port Number=${Port Number}</arg>
+<arg>Encoding=${Encoding}</arg>
+<doc>TWI KeyWord ,It writes ONE Byte on the serial port
+paramaters: Data -&gt; paramarter will hold the data to be sent
+Port Number -&gt; which port will write the data on
+Encoding -&gt; Encoding type (ascii,utf-8)
+Number of Bytes -&gt; number of bytes will be send
+Returns none</doc>
+<kw name="Write Data" library="SerialLibrary">
+<arg>data=${Data}</arg>
+<arg>encoding=${Encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20220825 13:06:37.158" endtime="20220825 13:06:37.158"/>
+</kw>
+<status status="PASS" starttime="20220825 13:06:37.157" endtime="20220825 13:06:37.159"/>
+</kw>
+<status status="PASS" starttime="20220825 13:06:37.157" endtime="20220825 13:06:37.159"/>
+</iter>
+<iter>
+<var name="${counter}">2</var>
+<kw name="Get From List" library="Collections">
+<var>${listvalue}</var>
+<arg>list_=@{list}</arg>
+<arg>index=${counter}</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<msg timestamp="20220825 13:06:37.159" level="INFO">${listvalue} = 10</msg>
+<status status="PASS" starttime="20220825 13:06:37.159" endtime="20220825 13:06:37.159"/>
+</kw>
+<kw name="TWI_Write_Byte" library="TWI_Serial_library">
+<arg>Data= ${listvalue}</arg>
+<arg>Port Number=${Port Number}</arg>
+<arg>Encoding=${Encoding}</arg>
+<doc>TWI KeyWord ,It writes ONE Byte on the serial port
+paramaters: Data -&gt; paramarter will hold the data to be sent
+Port Number -&gt; which port will write the data on
+Encoding -&gt; Encoding type (ascii,utf-8)
+Number of Bytes -&gt; number of bytes will be send
+Returns none</doc>
+<kw name="Write Data" library="SerialLibrary">
+<arg>data=${Data}</arg>
+<arg>encoding=${Encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20220825 13:06:37.160" endtime="20220825 13:06:37.160"/>
+</kw>
+<status status="PASS" starttime="20220825 13:06:37.159" endtime="20220825 13:06:37.160"/>
+</kw>
+<status status="PASS" starttime="20220825 13:06:37.159" endtime="20220825 13:06:37.160"/>
+</iter>
+<iter>
+<var name="${counter}">3</var>
+<kw name="Get From List" library="Collections">
+<var>${listvalue}</var>
+<arg>list_=@{list}</arg>
+<arg>index=${counter}</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<msg timestamp="20220825 13:06:37.161" level="INFO">${listvalue} = 5</msg>
+<status status="PASS" starttime="20220825 13:06:37.160" endtime="20220825 13:06:37.161"/>
+</kw>
+<kw name="TWI_Write_Byte" library="TWI_Serial_library">
+<arg>Data= ${listvalue}</arg>
+<arg>Port Number=${Port Number}</arg>
+<arg>Encoding=${Encoding}</arg>
+<doc>TWI KeyWord ,It writes ONE Byte on the serial port
+paramaters: Data -&gt; paramarter will hold the data to be sent
+Port Number -&gt; which port will write the data on
+Encoding -&gt; Encoding type (ascii,utf-8)
+Number of Bytes -&gt; number of bytes will be send
+Returns none</doc>
+<kw name="Write Data" library="SerialLibrary">
+<arg>data=${Data}</arg>
+<arg>encoding=${Encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20220825 13:06:37.161" endtime="20220825 13:06:37.162"/>
+</kw>
+<status status="PASS" starttime="20220825 13:06:37.161" endtime="20220825 13:06:37.162"/>
+</kw>
+<status status="PASS" starttime="20220825 13:06:37.160" endtime="20220825 13:06:37.162"/>
+</iter>
+<status status="PASS" starttime="20220825 13:06:37.154" endtime="20220825 13:06:37.162"/>
+</for>
+<status status="PASS" starttime="20220825 13:06:37.154" endtime="20220825 13:06:37.162"/>
+</kw>
+<kw name="TWI_read_Bytes" library="TWI_Serial_library">
+<var>${Actual}</var>
+<arg>Port Number=${Port Number}</arg>
+<arg>Encoding=${Encoding}</arg>
+<arg>size=4</arg>
+<doc>TWI KeyWord ,It reads Number of Bytes on the serial port untill detect passed terminator or passed size
+paramaters: Port Number -&gt; which port will write the data on
+size -&gt; number of bytes will be recieved
+Encoding -&gt; Encoding type (ascii,utf-8)
+terminator -&gt; reading is terminated when found in recieved bytes
+returns readed data</doc>
+<kw name="Read Until" library="SerialLibrary">
+<var>${Readdata}</var>
+<arg>terminator=${terminator}</arg>
+<arg>terminator_encoding=${terminator_encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<arg>size=${size}</arg>
+<arg>encoding=${Encoding}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20220825 13:06:37.164" level="INFO">${Readdata} = 15 02 10 05</msg>
+<status status="PASS" starttime="20220825 13:06:37.163" endtime="20220825 13:06:37.164"/>
+</kw>
+<msg timestamp="20220825 13:06:37.164" level="INFO">${Actual} = 15 02 10 05</msg>
+<status status="PASS" starttime="20220825 13:06:37.162" endtime="20220825 13:06:37.164"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${Actual}</arg>
+<arg>${ExpectedList}</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="PASS" starttime="20220825 13:06:37.164" endtime="20220825 13:06:37.164"/>
+</kw>
+<kw name="TWI_Close_Port" library="TWI_Serial_library">
+<arg>${Port Number}</arg>
+<doc>Deletes (Closes) passed port</doc>
+<kw name="Delete Port" library="SerialLibrary">
+<arg>${Port Number}</arg>
+<doc>Deletes specified port.</doc>
+<status status="PASS" starttime="20220825 13:06:37.165" endtime="20220825 13:06:37.165"/>
+</kw>
+<status status="PASS" starttime="20220825 13:06:37.164" endtime="20220825 13:06:37.165"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Dir=${DIR}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220825 13:06:37.165" endtime="20220825 13:06:37.166"/>
+</kw>
+<tag>Send/Recieve</tag>
+<status status="PASS" starttime="20220825 13:06:37.147" endtime="20220825 13:06:37.166"/>
+</test>
+<status status="PASS" starttime="20220825 13:06:28.989" endtime="20220825 13:06:37.166"/>
+</suite>
+<status status="PASS" starttime="20220825 13:06:28.965" endtime="20220825 13:06:37.167"/>
+</suite>
+<statistics>
+<total>
+<stat pass="8" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="4" fail="0" skip="0">Functional</stat>
+<stat pass="1" fail="0" skip="0">Power on</stat>
+<stat pass="1" fail="0" skip="0">Send</stat>
+<stat pass="1" fail="0" skip="0">Send/Recieve</stat>
+<stat pass="1" fail="0" skip="0">smoke</stat>
+</tag>
+<suite>
+<stat pass="8" fail="0" skip="0" id="s1" name="Tests">Tests</stat>
+<stat pass="8" fail="0" skip="0" id="s1-s1" name="Test TWI Serial library">Tests.Test TWI Serial library</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.8.1 on win32)" generated="20220904 14:34:36.314" rpa="false" schemaversion="3">
+<suite id="s1" name="Test PC10040 DevelopmentBoard" source="C:\Users\mohamed.wagdy\Downloads\robotframework-seriallibrary-develop (1)\robotframework-seriallibrary-develop\tests\Test_PC10040_DevelopmentBoard.robot">
+<kw name="TWI_Open_Port" library="TWI_Serial_library" type="SETUP">
+<arg>Port Number=${Port Number}</arg>
+<arg>Buad Rate=${Buad Rate}</arg>
+<arg>Encoding=ascii</arg>
+<arg>timeout=${Time out}</arg>
+<doc>Sets configurations(Port Number,Buad Rate,Encoding and Timeout)
+And Opens passed port</doc>
+<kw name="Add Port" library="SerialLibrary">
+<var>${PortConfigurations}</var>
+<arg>port_locator=${Port Number}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Adds new port with specified locator.</doc>
+<msg timestamp="20220904 14:34:36.370" level="INFO">${PortConfigurations} = Serial&lt;id=0x384cd78, open=True&gt;(port='COM3', baudrate=9600, bytesize=8, parity='N', stopbits=1, timeout=5.0, xonxoff=False, rtscts=False, dsrdtr=False)</msg>
+<status status="PASS" starttime="20220904 14:34:36.367" endtime="20220904 14:34:36.370"/>
+</kw>
+<kw name="Port Should Be Open" library="SerialLibrary">
+<arg>${Port Number}</arg>
+<doc>Fails if specified port is closed.</doc>
+<status status="PASS" starttime="20220904 14:34:36.370" endtime="20220904 14:34:36.370"/>
+</kw>
+<kw name="Set Port Parameter" library="SerialLibrary">
+<arg>param_name=baudrate</arg>
+<arg>value=${Buad Rate}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Sets port parameter.</doc>
+<status status="PASS" starttime="20220904 14:34:36.370" endtime="20220904 14:34:36.371"/>
+</kw>
+<kw name="Set Encoding" library="SerialLibrary">
+<arg>encoding=${Encoding}</arg>
+<doc>Sets default encoding for the library instance.</doc>
+<status status="PASS" starttime="20220904 14:34:36.371" endtime="20220904 14:34:36.372"/>
+</kw>
+<status status="PASS" starttime="20220904 14:34:36.366" endtime="20220904 14:34:36.372"/>
+</kw>
+<test id="s1-t1" name="Nordic_Board_Is_Waked_Up" line="12">
+<kw name="Evaluate" library="BuiltIn">
+<var>${message}</var>
+<arg>${BLUE} "\\nPlease Press on Reset Button you have 10 seconds"</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20220904 14:34:36.373" level="INFO">${message} = [34m
+Please Press on Reset Button you have 10 seconds</msg>
+<status status="PASS" starttime="20220904 14:34:36.373" endtime="20220904 14:34:36.373"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${message}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220904 14:34:36.374" endtime="20220904 14:34:36.374"/>
+</kw>
+<kw name="TWI_read_Bytes" library="TWI_Serial_library">
+<var>${Actual}</var>
+<arg>terminator=:</arg>
+<arg>Port Number=${Port Number}</arg>
+<arg>Encoding=ascii</arg>
+<arg>size=10</arg>
+<arg>terminator_encoding=ascii</arg>
+<doc>TWI KeyWord ,It reads Number of Bytes on the serial port untill detect passed terminator or passed size
+paramaters: Port Number -&gt; which port will write the data on
+size -&gt; number of bytes will be recieved
+Encoding -&gt; Encoding type (ascii,utf-8)
+terminator -&gt; reading is terminated when found in recieved bytes
+returns readed data</doc>
+<kw name="Read Until" library="SerialLibrary">
+<var>${Readdata}</var>
+<arg>terminator=${terminator}</arg>
+<arg>terminator_encoding=${terminator_encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<arg>size=${size}</arg>
+<arg>encoding=${Encoding}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20220904 14:34:36.986" level="INFO">${Readdata} = 
+Start:</msg>
+<status status="PASS" starttime="20220904 14:34:36.375" endtime="20220904 14:34:36.986"/>
+</kw>
+<msg timestamp="20220904 14:34:36.987" level="INFO">${Actual} = 
+Start:</msg>
+<status status="PASS" starttime="20220904 14:34:36.375" endtime="20220904 14:34:36.987"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>first=${Actual}</arg>
+<arg>second=Start:</arg>
+<arg>strip_spaces=True</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220904 14:34:36.988" endtime="20220904 14:34:36.989"/>
+</kw>
+<tag>ConnectionTesing</tag>
+<status status="PASS" starttime="20220904 14:34:36.372" endtime="20220904 14:34:36.990"/>
+</test>
+<test id="s1-t2" name="Test_Setting_Led_On" line="24">
+<kw name="TWI_Write_Byte" library="TWI_Serial_library">
+<arg>Data=1</arg>
+<arg>Port Number=${Port Number}</arg>
+<doc>TWI KeyWord ,It writes ONE Byte on the serial port
+paramaters: Data -&gt; paramarter will hold the data to be sent
+Port Number -&gt; which port will write the data on
+Encoding -&gt; Encoding type (ascii,utf-8)
+Number of Bytes -&gt; number of bytes will be send
+Returns none</doc>
+<kw name="Write Data" library="SerialLibrary">
+<arg>data=${Data}</arg>
+<arg>encoding=${Encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20220904 14:34:36.994" endtime="20220904 14:34:36.995"/>
+</kw>
+<status status="PASS" starttime="20220904 14:34:36.993" endtime="20220904 14:34:36.995"/>
+</kw>
+<kw name="TWI_read_Bytes" library="TWI_Serial_library">
+<var>${Actual}</var>
+<arg>Port Number=${Port Number}</arg>
+<arg>size=1</arg>
+<doc>TWI KeyWord ,It reads Number of Bytes on the serial port untill detect passed terminator or passed size
+paramaters: Port Number -&gt; which port will write the data on
+size -&gt; number of bytes will be recieved
+Encoding -&gt; Encoding type (ascii,utf-8)
+terminator -&gt; reading is terminated when found in recieved bytes
+returns readed data</doc>
+<kw name="Read Until" library="SerialLibrary">
+<var>${Readdata}</var>
+<arg>terminator=${terminator}</arg>
+<arg>terminator_encoding=${terminator_encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<arg>size=${size}</arg>
+<arg>encoding=${Encoding}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20220904 14:34:36.998" level="INFO">${Readdata} = 20</msg>
+<status status="PASS" starttime="20220904 14:34:36.997" endtime="20220904 14:34:36.998"/>
+</kw>
+<msg timestamp="20220904 14:34:36.999" level="INFO">${Actual} = 20</msg>
+<status status="PASS" starttime="20220904 14:34:36.996" endtime="20220904 14:34:36.999"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>first=${Actual}</arg>
+<arg>second=20</arg>
+<arg>strip_spaces=True</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220904 14:34:36.999" endtime="20220904 14:34:37.000"/>
+</kw>
+<status status="PASS" starttime="20220904 14:34:36.992" endtime="20220904 14:34:37.000"/>
+</test>
+<test id="s1-t3" name="Test_Turning_Led_Off" line="31">
+<kw name="TWI_Write_Byte" library="TWI_Serial_library">
+<arg>Data=2</arg>
+<arg>Port Number=${Port Number}</arg>
+<doc>TWI KeyWord ,It writes ONE Byte on the serial port
+paramaters: Data -&gt; paramarter will hold the data to be sent
+Port Number -&gt; which port will write the data on
+Encoding -&gt; Encoding type (ascii,utf-8)
+Number of Bytes -&gt; number of bytes will be send
+Returns none</doc>
+<kw name="Write Data" library="SerialLibrary">
+<arg>data=${Data}</arg>
+<arg>encoding=${Encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20220904 14:34:37.003" endtime="20220904 14:34:37.004"/>
+</kw>
+<status status="PASS" starttime="20220904 14:34:37.003" endtime="20220904 14:34:37.004"/>
+</kw>
+<kw name="TWI_read_Bytes" library="TWI_Serial_library">
+<var>${Actual}</var>
+<arg>Port Number=${Port Number}</arg>
+<arg>size=1</arg>
+<doc>TWI KeyWord ,It reads Number of Bytes on the serial port untill detect passed terminator or passed size
+paramaters: Port Number -&gt; which port will write the data on
+size -&gt; number of bytes will be recieved
+Encoding -&gt; Encoding type (ascii,utf-8)
+terminator -&gt; reading is terminated when found in recieved bytes
+returns readed data</doc>
+<kw name="Read Until" library="SerialLibrary">
+<var>${Readdata}</var>
+<arg>terminator=${terminator}</arg>
+<arg>terminator_encoding=${terminator_encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<arg>size=${size}</arg>
+<arg>encoding=${Encoding}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20220904 14:34:37.007" level="INFO">${Readdata} = 0D</msg>
+<status status="PASS" starttime="20220904 14:34:37.006" endtime="20220904 14:34:37.007"/>
+</kw>
+<msg timestamp="20220904 14:34:37.007" level="INFO">${Actual} = 0D</msg>
+<status status="PASS" starttime="20220904 14:34:37.005" endtime="20220904 14:34:37.007"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>first=${Actual}</arg>
+<arg>second=0D</arg>
+<arg>strip_spaces=True</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220904 14:34:37.007" endtime="20220904 14:34:37.007"/>
+</kw>
+<status status="PASS" starttime="20220904 14:34:37.002" endtime="20220904 14:34:37.007"/>
+</test>
+<kw name="TWI_Close_Port" library="TWI_Serial_library" type="TEARDOWN">
+<arg>${Port Number}</arg>
+<doc>Deletes (Closes) passed port</doc>
+<kw name="Delete Port" library="SerialLibrary">
+<arg>${Port Number}</arg>
+<doc>Deletes specified port.</doc>
+<status status="PASS" starttime="20220904 14:34:37.011" endtime="20220904 14:34:37.011"/>
+</kw>
+<status status="PASS" starttime="20220904 14:34:37.009" endtime="20220904 14:34:37.011"/>
+</kw>
+<status status="PASS" starttime="20220904 14:34:36.316" endtime="20220904 14:34:37.011"/>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">ConnectionTesing</stat>
+</tag>
+<suite>
+<stat pass="3" fail="0" skip="0" id="s1" name="Test PC10040 DevelopmentBoard">Test PC10040 DevelopmentBoard</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
