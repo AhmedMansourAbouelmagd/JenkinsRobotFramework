@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.8.3 on win32)" generated="20221023 20:11:02.578" rpa="false" schemaversion="3">
+<suite id="s1" name="RedLedBlink" source="C:\Users\ahmed.aboelmagd\PycharmProjects\Agent1Code\RedLedBlink.robot">
+<kw name="TWI_Open_Port" library="TWI_Serial_library" type="SETUP">
+<arg>Port Number=COM3</arg>
+<arg>Encoding=hexlify</arg>
+<arg>Buad Rate=115200</arg>
+<arg>timeout=5</arg>
+<doc>Sets configurations(Port Number,Buad Rate,Encoding and Timeout)
+And Opens passed port</doc>
+<kw name="Add Port" library="SerialLibrary">
+<var>${PortConfigurations}</var>
+<arg>port_locator=${Port Number}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Adds new port with specified locator.</doc>
+<msg timestamp="20221023 20:11:02.633" level="INFO">${PortConfigurations} = Serial&lt;id=0x1b1cf7ee670, open=True&gt;(port='COM3', baudrate=9600, bytesize=8, parity='N', stopbits=1, timeout=5.0, xonxoff=False, rtscts=False, dsrdtr=False)</msg>
+<status status="PASS" starttime="20221023 20:11:02.630" endtime="20221023 20:11:02.633"/>
+</kw>
+<kw name="Port Should Be Open" library="SerialLibrary">
+<arg>${Port Number}</arg>
+<doc>Fails if specified port is closed.</doc>
+<status status="PASS" starttime="20221023 20:11:02.633" endtime="20221023 20:11:02.633"/>
+</kw>
+<kw name="Set Port Parameter" library="SerialLibrary">
+<arg>param_name=baudrate</arg>
+<arg>value=${Buad Rate}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Sets port parameter.</doc>
+<status status="PASS" starttime="20221023 20:11:02.633" endtime="20221023 20:11:02.634"/>
+</kw>
+<kw name="Set Encoding" library="SerialLibrary">
+<arg>encoding=${Encoding}</arg>
+<doc>Sets default encoding for the library instance.</doc>
+<status status="PASS" starttime="20221023 20:11:02.634" endtime="20221023 20:11:02.634"/>
+</kw>
+<status status="PASS" starttime="20221023 20:11:02.629" endtime="20221023 20:11:02.634"/>
+</kw>
+<test id="s1-t1" name="Test Case 1" line="6">
+<kw name="Set HIGH" library="TWI_RHP_Comm">
+<arg>Port Number=COM3</arg>
+<arg>featNum=2</arg>
+<arg>attrNum=0</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${featNum}</var>
+<arg>${featNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221023 20:11:02.635" level="INFO">${featNum} = 32</msg>
+<status status="PASS" starttime="20221023 20:11:02.635" endtime="20221023 20:11:02.635"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${attrNum}</var>
+<arg>${attrNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221023 20:11:02.635" level="INFO">${attrNum} = 30</msg>
+<status status="PASS" starttime="20221023 20:11:02.635" endtime="20221023 20:11:02.636"/>
+</kw>
+<kw name="TWI_Write_Byte" library="TWI_Serial_library">
+<arg>Data=54 53 00 16 54 57 10 20 01 00 00 C0 00 00 00 00 FF FF FF FD 53 ${featNum} 2E ${attrNum} 3D 30</arg>
+<arg>Port Number=${Port Number}</arg>
+<doc>TWI KeyWord ,It writes ONE Byte on the serial port
+paramaters: Data -&gt; paramarter will hold the data to be sent
+Port Number -&gt; which port will write the data on
+Encoding -&gt; Encoding type (ascii,utf-8)
+Number of Bytes -&gt; number of bytes will be send
+Returns none</doc>
+<kw name="Write Data" library="SerialLibrary">
+<arg>data=${Data}</arg>
+<arg>encoding=${Encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20221023 20:11:02.636" endtime="20221023 20:11:02.637"/>
+</kw>
+<status status="PASS" starttime="20221023 20:11:02.636" endtime="20221023 20:11:02.637"/>
+</kw>
+<status status="PASS" starttime="20221023 20:11:02.635" endtime="20221023 20:11:02.637"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221023 20:11:03.648" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20221023 20:11:02.637" endtime="20221023 20:11:03.648"/>
+</kw>
+<kw name="Set LOW" library="TWI_RHP_Comm">
+<arg>Port Number=COM3</arg>
+<arg>featNum=2</arg>
+<arg>attrNum=0</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${featNum}</var>
+<arg>${featNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221023 20:11:03.651" level="INFO">${featNum} = 32</msg>
+<status status="PASS" starttime="20221023 20:11:03.650" endtime="20221023 20:11:03.651"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${attrNum}</var>
+<arg>${attrNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221023 20:11:03.652" level="INFO">${attrNum} = 30</msg>
+<status status="PASS" starttime="20221023 20:11:03.651" endtime="20221023 20:11:03.652"/>
+</kw>
+<kw name="TWI_Write_Byte" library="TWI_Serial_library">
+<arg>Data=54 53 00 16 54 57 10 20 01 00 00 C0 00 00 00 00 FF FF FF FD 53 ${featNum} 2E ${attrNum} 3D 31</arg>
+<arg>Port Number=${Port Number}</arg>
+<doc>TWI KeyWord ,It writes ONE Byte on the serial port
+paramaters: Data -&gt; paramarter will hold the data to be sent
+Port Number -&gt; which port will write the data on
+Encoding -&gt; Encoding type (ascii,utf-8)
+Number of Bytes -&gt; number of bytes will be send
+Returns none</doc>
+<kw name="Write Data" library="SerialLibrary">
+<arg>data=${Data}</arg>
+<arg>encoding=${Encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20221023 20:11:03.653" endtime="20221023 20:11:03.654"/>
+</kw>
+<status status="PASS" starttime="20221023 20:11:03.652" endtime="20221023 20:11:03.654"/>
+</kw>
+<status status="PASS" starttime="20221023 20:11:03.649" endtime="20221023 20:11:03.654"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221023 20:11:04.667" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20221023 20:11:03.654" endtime="20221023 20:11:04.667"/>
+</kw>
+<kw name="Set HIGH" library="TWI_RHP_Comm">
+<arg>Port Number=COM3</arg>
+<arg>featNum=2</arg>
+<arg>attrNum=0</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${featNum}</var>
+<arg>${featNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221023 20:11:04.670" level="INFO">${featNum} = 32</msg>
+<status status="PASS" starttime="20221023 20:11:04.669" endtime="20221023 20:11:04.670"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${attrNum}</var>
+<arg>${attrNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221023 20:11:04.671" level="INFO">${attrNum} = 30</msg>
+<status status="PASS" starttime="20221023 20:11:04.670" endtime="20221023 20:11:04.671"/>
+</kw>
+<kw name="TWI_Write_Byte" library="TWI_Serial_library">
+<arg>Data=54 53 00 16 54 57 10 20 01 00 00 C0 00 00 00 00 FF FF FF FD 53 ${featNum} 2E ${attrNum} 3D 30</arg>
+<arg>Port Number=${Port Number}</arg>
+<doc>TWI KeyWord ,It writes ONE Byte on the serial port
+paramaters: Data -&gt; paramarter will hold the data to be sent
+Port Number -&gt; which port will write the data on
+Encoding -&gt; Encoding type (ascii,utf-8)
+Number of Bytes -&gt; number of bytes will be send
+Returns none</doc>
+<kw name="Write Data" library="SerialLibrary">
+<arg>data=${Data}</arg>
+<arg>encoding=${Encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20221023 20:11:04.672" endtime="20221023 20:11:04.674"/>
+</kw>
+<status status="PASS" starttime="20221023 20:11:04.671" endtime="20221023 20:11:04.674"/>
+</kw>
+<status status="PASS" starttime="20221023 20:11:04.668" endtime="20221023 20:11:04.674"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221023 20:11:05.675" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20221023 20:11:04.675" endtime="20221023 20:11:05.675"/>
+</kw>
+<kw name="Set LOW" library="TWI_RHP_Comm">
+<arg>Port Number=COM3</arg>
+<arg>featNum=2</arg>
+<arg>attrNum=0</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${featNum}</var>
+<arg>${featNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221023 20:11:05.678" level="INFO">${featNum} = 32</msg>
+<status status="PASS" starttime="20221023 20:11:05.678" endtime="20221023 20:11:05.678"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${attrNum}</var>
+<arg>${attrNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221023 20:11:05.679" level="INFO">${attrNum} = 30</msg>
+<status status="PASS" starttime="20221023 20:11:05.678" endtime="20221023 20:11:05.679"/>
+</kw>
+<kw name="TWI_Write_Byte" library="TWI_Serial_library">
+<arg>Data=54 53 00 16 54 57 10 20 01 00 00 C0 00 00 00 00 FF FF FF FD 53 ${featNum} 2E ${attrNum} 3D 31</arg>
+<arg>Port Number=${Port Number}</arg>
+<doc>TWI KeyWord ,It writes ONE Byte on the serial port
+paramaters: Data -&gt; paramarter will hold the data to be sent
+Port Number -&gt; which port will write the data on
+Encoding -&gt; Encoding type (ascii,utf-8)
+Number of Bytes -&gt; number of bytes will be send
+Returns none</doc>
+<kw name="Write Data" library="SerialLibrary">
+<arg>data=${Data}</arg>
+<arg>encoding=${Encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20221023 20:11:05.680" endtime="20221023 20:11:05.681"/>
+</kw>
+<status status="PASS" starttime="20221023 20:11:05.679" endtime="20221023 20:11:05.681"/>
+</kw>
+<status status="PASS" starttime="20221023 20:11:05.676" endtime="20221023 20:11:05.681"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221023 20:11:06.683" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20221023 20:11:05.682" endtime="20221023 20:11:06.683"/>
+</kw>
+<status status="PASS" starttime="20221023 20:11:02.634" endtime="20221023 20:11:06.684"/>
+</test>
+<kw name="TWI_Close_Port" library="TWI_Serial_library" type="TEARDOWN">
+<arg>Port Number=COM3</arg>
+<doc>Deletes (Closes) passed port</doc>
+<kw name="Delete Port" library="SerialLibrary">
+<arg>${Port Number}</arg>
+<doc>Deletes specified port.</doc>
+<status status="PASS" starttime="20221023 20:11:06.689" endtime="20221023 20:11:06.690"/>
+</kw>
+<status status="PASS" starttime="20221023 20:11:06.688" endtime="20221023 20:11:06.690"/>
+</kw>
+<status status="PASS" starttime="20221023 20:11:02.593" endtime="20221023 20:11:06.690"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="RedLedBlink">RedLedBlink</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
