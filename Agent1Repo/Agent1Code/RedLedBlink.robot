@@ -4,11 +4,11 @@ Suite Setup    TWI_Open_Port    Port Number=COM20    Encoding=hexlify    Buad Ra
 Suite Teardown    TWI_Close_Port    Port Number=COM20
 *** Test Cases ***
 Test Case 1
-    Set HIGH   Port Number=COM20    featNum=2    attrNum=6
+    Set HIGH   Port Number=COM20    featNum=1    attrNum=8
     sleep   1
-    Set LOW   Port Number=COM20    featNum=2    attrNum=6
+    Set LOW   Port Number=COM20    featNum=1    attrNum=8
     sleep   1
-    Set HIGH   Port Number=COM20    featNum=2    attrNum=6
+    Set HIGH   Port Number=COM20    featNum=1    attrNum=8
     sleep   1
-    Set LOW   Port Number=COM20    featNum=2    attrNum=6
+    Set LOW   Port Number=COM20    featNum=1    attrNum=8
     sleep   1
