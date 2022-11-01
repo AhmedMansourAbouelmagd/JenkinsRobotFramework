@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.0 (Python 3.8.3 on darwin)" generated="20221027 17:46:28.897" rpa="false" schemaversion="3">
+<suite id="s1" name="Serial Command" source="/Users/user/Desktop/clean_new_repo/TWI iOS SDK TP/Resources/serial_command.robot">
+<test id="s1-t1" name="initializing Serial Port" line="7">
+<kw name="initializing Serial" library="Insulte_ios_app_resources">
+<kw name="Evaluate" library="BuiltIn">
+<var>${message}</var>
+<arg>${BLUE} "\\n-&gt; Initializing Serial communication"</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221027 17:46:29.285" level="INFO">${message} = [34m
+-&gt; Initializing Serial communication</msg>
+<status status="PASS" starttime="20221027 17:46:29.285" endtime="20221027 17:46:29.286"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${message}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221027 17:46:29.286" endtime="20221027 17:46:29.287"/>
+</kw>
+<kw name="TWI_Open_Port" library="TWI_Serial_library">
+<arg>Port Number=${Port Number}</arg>
+<arg>Buad Rate=${Buad Rate}</arg>
+<arg>Encoding=hexlify</arg>
+<arg>timeout=${Time out}</arg>
+<doc>Sets configurations(Port Number,Buad Rate,Encoding and Timeout)
+And Opens passed port</doc>
+<kw name="Add Port" library="SerialLibrary">
+<var>${PortConfigurations}</var>
+<arg>port_locator=${Port Number}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Adds new port with specified locator.</doc>
+<msg timestamp="20221027 17:46:29.290" level="INFO">${PortConfigurations} = Serial&lt;id=0x7fa0b3ec1250, open=True&gt;(port='/dev/tty.usbmodem0006821328461', baudrate=9600, bytesize=8, parity='N', stopbits=1, timeout=10.0, xonxoff=False, rtscts=False, dsrdtr=False)</msg>
+<status status="PASS" starttime="20221027 17:46:29.288" endtime="20221027 17:46:29.291"/>
+</kw>
+<kw name="Port Should Be Open" library="SerialLibrary">
+<arg>${Port Number}</arg>
+<doc>Fails if specified port is closed.</doc>
+<status status="PASS" starttime="20221027 17:46:29.291" endtime="20221027 17:46:29.291"/>
+</kw>
+<kw name="Set Port Parameter" library="SerialLibrary">
+<arg>param_name=baudrate</arg>
+<arg>value=${Buad Rate}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Sets port parameter.</doc>
+<status status="PASS" starttime="20221027 17:46:29.291" endtime="20221027 17:46:29.292"/>
+</kw>
+<kw name="Set Encoding" library="SerialLibrary">
+<arg>encoding=${Encoding}</arg>
+<doc>Sets default encoding for the library instance.</doc>
+<status status="PASS" starttime="20221027 17:46:29.293" endtime="20221027 17:46:29.293"/>
+</kw>
+<status status="PASS" starttime="20221027 17:46:29.287" endtime="20221027 17:46:29.293"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221027 17:46:31.296" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20221027 17:46:29.293" endtime="20221027 17:46:31.297"/>
+</kw>
+<status status="PASS" starttime="20221027 17:46:29.284" endtime="20221027 17:46:31.298"/>
+</kw>
+<kw name="Restart board" library="Insulte_ios_app_resources">
+<kw name="Evaluate" library="BuiltIn">
+<var>${message}</var>
+<arg>${BLUE} "\\n-&gt; Restart board"</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221027 17:46:31.300" level="INFO">${message} = [34m
+-&gt; Restart board</msg>
+<status status="PASS" starttime="20221027 17:46:31.299" endtime="20221027 17:46:31.300"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${message}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221027 17:46:31.300" endtime="20221027 17:46:31.301"/>
+</kw>
+<kw name="Set LOW" library="Insulte_ios_app_resources">
+<arg>Port Number=${Port Number}</arg>
+<arg>portNum=0</arg>
+<arg>pinNum=3</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${portNum}</var>
+<arg>${portNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221027 17:46:31.304" level="INFO">${portNum} = 30</msg>
+<status status="PASS" starttime="20221027 17:46:31.303" endtime="20221027 17:46:31.304"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${pinNum}</var>
+<arg>${pinNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221027 17:46:31.305" level="INFO">${pinNum} = 33</msg>
+<status status="PASS" starttime="20221027 17:46:31.304" endtime="20221027 17:46:31.305"/>
+</kw>
+<kw name="TWI_Write_Byte" library="TWI_Serial_library">
+<arg>Data=54 53 00 16 54 57 10 20 01 00 00 C0 00 00 00 00 FF FF FF FD 53 ${portNum} 2E ${pinNum} 3D 31</arg>
+<arg>Port Number=${Port Number}</arg>
+<doc>TWI KeyWord ,It writes ONE Byte on the serial port
+paramaters: Data -&gt; paramarter will hold the data to be sent
+Port Number -&gt; which port will write the data on
+Encoding -&gt; Encoding type (ascii,utf-8)
+Number of Bytes -&gt; number of bytes will be send
+Returns none</doc>
+<kw name="Write Data" library="SerialLibrary">
+<arg>data=${Data}</arg>
+<arg>encoding=${Encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20221027 17:46:31.306" endtime="20221027 17:46:31.308"/>
+</kw>
+<status status="PASS" starttime="20221027 17:46:31.305" endtime="20221027 17:46:31.309"/>
+</kw>
+<status status="PASS" starttime="20221027 17:46:31.302" endtime="20221027 17:46:31.309"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>5</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221027 17:46:36.310" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20221027 17:46:31.309" endtime="20221027 17:46:36.310"/>
+</kw>
+<kw name="Set HIGH" library="Insulte_ios_app_resources">
+<arg>Port Number=${Port Number}</arg>
+<arg>portNum=0</arg>
+<arg>pinNum=3</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${portNum}</var>
+<arg>${portNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221027 17:46:36.314" level="INFO">${portNum} = 30</msg>
+<status status="PASS" starttime="20221027 17:46:36.313" endtime="20221027 17:46:36.314"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${pinNum}</var>
+<arg>${pinNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221027 17:46:36.315" level="INFO">${pinNum} = 33</msg>
+<status status="PASS" starttime="20221027 17:46:36.315" endtime="20221027 17:46:36.316"/>
+</kw>
+<kw name="TWI_Write_Byte" library="TWI_Serial_library">
+<arg>Data=54 53 00 16 54 57 10 20 01 00 00 C0 00 00 00 00 FF FF FF FD 53 ${portNum} 2E ${pinNum} 3D 30</arg>
+<arg>Port Number=${Port Number}</arg>
+<doc>TWI KeyWord ,It writes ONE Byte on the serial port
+paramaters: Data -&gt; paramarter will hold the data to be sent
+Port Number -&gt; which port will write the data on
+Encoding -&gt; Encoding type (ascii,utf-8)
+Number of Bytes -&gt; number of bytes will be send
+Returns none</doc>
+<kw name="Write Data" library="SerialLibrary">
+<arg>data=${Data}</arg>
+<arg>encoding=${Encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20221027 17:46:36.318" endtime="20221027 17:46:36.319"/>
+</kw>
+<status status="PASS" starttime="20221027 17:46:36.316" endtime="20221027 17:46:36.319"/>
+</kw>
+<status status="PASS" starttime="20221027 17:46:36.311" endtime="20221027 17:46:36.320"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>8</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221027 17:46:44.321" level="INFO">Slept 8 seconds</msg>
+<status status="PASS" starttime="20221027 17:46:36.320" endtime="20221027 17:46:44.322"/>
+</kw>
+<status status="PASS" starttime="20221027 17:46:31.298" endtime="20221027 17:46:44.323"/>
+</kw>
+<kw name="Power on board" library="Insulte_ios_app_resources">
+<kw name="Evaluate" library="BuiltIn">
+<var>${message}</var>
+<arg>${BLUE} "\\n-&gt; Power on board"</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221027 17:46:44.326" level="INFO">${message} = [34m
+-&gt; Power on board</msg>
+<status status="PASS" starttime="20221027 17:46:44.325" endtime="20221027 17:46:44.327"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${message}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221027 17:46:44.327" endtime="20221027 17:46:44.328"/>
+</kw>
+<kw name="Set HIGH" library="Insulte_ios_app_resources">
+<arg>Port Number=${Port Number}</arg>
+<arg>portNum=0</arg>
+<arg>pinNum=3</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${portNum}</var>
+<arg>${portNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221027 17:46:44.331" level="INFO">${portNum} = 30</msg>
+<status status="PASS" starttime="20221027 17:46:44.330" endtime="20221027 17:46:44.331"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${pinNum}</var>
+<arg>${pinNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221027 17:46:44.332" level="INFO">${pinNum} = 33</msg>
+<status status="PASS" starttime="20221027 17:46:44.331" endtime="20221027 17:46:44.332"/>
+</kw>
+<kw name="TWI_Write_Byte" library="TWI_Serial_library">
+<arg>Data=54 53 00 16 54 57 10 20 01 00 00 C0 00 00 00 00 FF FF FF FD 53 ${portNum} 2E ${pinNum} 3D 30</arg>
+<arg>Port Number=${Port Number}</arg>
+<doc>TWI KeyWord ,It writes ONE Byte on the serial port
+paramaters: Data -&gt; paramarter will hold the data to be sent
+Port Number -&gt; which port will write the data on
+Encoding -&gt; Encoding type (ascii,utf-8)
+Number of Bytes -&gt; number of bytes will be send
+Returns none</doc>
+<kw name="Write Data" library="SerialLibrary">
+<arg>data=${Data}</arg>
+<arg>encoding=${Encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20221027 17:46:44.334" endtime="20221027 17:46:44.335"/>
+</kw>
+<status status="PASS" starttime="20221027 17:46:44.333" endtime="20221027 17:46:44.335"/>
+</kw>
+<status status="PASS" starttime="20221027 17:46:44.329" endtime="20221027 17:46:44.336"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>8</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221027 17:46:52.337" level="INFO">Slept 8 seconds</msg>
+<status status="PASS" starttime="20221027 17:46:44.336" endtime="20221027 17:46:52.337"/>
+</kw>
+<status status="PASS" starttime="20221027 17:46:44.324" endtime="20221027 17:46:52.338"/>
+</kw>
+<kw name="Power click" library="Insulte_ios_app_resources">
+<kw name="Evaluate" library="BuiltIn">
+<var>${message}</var>
+<arg>${BLUE} "\\n-&gt; Power click"</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221027 17:46:52.341" level="INFO">${message} = [34m
+-&gt; Power click</msg>
+<status status="PASS" starttime="20221027 17:46:52.340" endtime="20221027 17:46:52.341"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${message}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221027 17:46:52.341" endtime="20221027 17:46:52.342"/>
+</kw>
+<kw name="Set HIGH" library="Insulte_ios_app_resources">
+<arg>Port Number=${Port Number}</arg>
+<arg>portNum=0</arg>
+<arg>pinNum=0</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${portNum}</var>
+<arg>${portNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221027 17:46:52.344" level="INFO">${portNum} = 30</msg>
+<status status="PASS" starttime="20221027 17:46:52.344" endtime="20221027 17:46:52.344"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${pinNum}</var>
+<arg>${pinNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221027 17:46:52.346" level="INFO">${pinNum} = 30</msg>
+<status status="PASS" starttime="20221027 17:46:52.345" endtime="20221027 17:46:52.346"/>
+</kw>
+<kw name="TWI_Write_Byte" library="TWI_Serial_library">
+<arg>Data=54 53 00 16 54 57 10 20 01 00 00 C0 00 00 00 00 FF FF FF FD 53 ${portNum} 2E ${pinNum} 3D 30</arg>
+<arg>Port Number=${Port Number}</arg>
+<doc>TWI KeyWord ,It writes ONE Byte on the serial port
+paramaters: Data -&gt; paramarter will hold the data to be sent
+Port Number -&gt; which port will write the data on
+Encoding -&gt; Encoding type (ascii,utf-8)
+Number of Bytes -&gt; number of bytes will be send
+Returns none</doc>
+<kw name="Write Data" library="SerialLibrary">
+<arg>data=${Data}</arg>
+<arg>encoding=${Encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20221027 17:46:52.348" endtime="20221027 17:46:52.349"/>
+</kw>
+<status status="PASS" starttime="20221027 17:46:52.346" endtime="20221027 17:46:52.349"/>
+</kw>
+<status status="PASS" starttime="20221027 17:46:52.342" endtime="20221027 17:46:52.350"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221027 17:46:54.352" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20221027 17:46:52.350" endtime="20221027 17:46:54.353"/>
+</kw>
+<kw name="Set LOW" library="Insulte_ios_app_resources">
+<arg>Port Number=${Port Number}</arg>
+<arg>portNum=0</arg>
+<arg>pinNum=0</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${portNum}</var>
+<arg>${portNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221027 17:46:54.355" level="INFO">${portNum} = 30</msg>
+<status status="PASS" starttime="20221027 17:46:54.354" endtime="20221027 17:46:54.355"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${pinNum}</var>
+<arg>${pinNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221027 17:46:54.356" level="INFO">${pinNum} = 30</msg>
+<status status="PASS" starttime="20221027 17:46:54.355" endtime="20221027 17:46:54.356"/>
+</kw>
+<kw name="TWI_Write_Byte" library="TWI_Serial_library">
+<arg>Data=54 53 00 16 54 57 10 20 01 00 00 C0 00 00 00 00 FF FF FF FD 53 ${portNum} 2E ${pinNum} 3D 31</arg>
+<arg>Port Number=${Port Number}</arg>
+<doc>TWI KeyWord ,It writes ONE Byte on the serial port
+paramaters: Data -&gt; paramarter will hold the data to be sent
+Port Number -&gt; which port will write the data on
+Encoding -&gt; Encoding type (ascii,utf-8)
+Number of Bytes -&gt; number of bytes will be send
+Returns none</doc>
+<kw name="Write Data" library="SerialLibrary">
+<arg>data=${Data}</arg>
+<arg>encoding=${Encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20221027 17:46:54.357" endtime="20221027 17:46:54.359"/>
+</kw>
+<status status="PASS" starttime="20221027 17:46:54.356" endtime="20221027 17:46:54.359"/>
+</kw>
+<status status="PASS" starttime="20221027 17:46:54.353" endtime="20221027 17:46:54.359"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>4</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221027 17:46:58.360" level="INFO">Slept 4 seconds</msg>
+<status status="PASS" starttime="20221027 17:46:54.359" endtime="20221027 17:46:58.361"/>
+</kw>
+<status status="PASS" starttime="20221027 17:46:52.339" endtime="20221027 17:46:58.361"/>
+</kw>
+<kw name="Clear caches" library="Insulte_ios_app_resources">
+<kw name="Evaluate" library="BuiltIn">
+<var>${message}</var>
+<arg>${BLUE} "\\n-&gt; Clear caches"</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221027 17:46:58.365" level="INFO">${message} = [34m
+-&gt; Clear caches</msg>
+<status status="PASS" starttime="20221027 17:46:58.363" endtime="20221027 17:46:58.365"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${message}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221027 17:46:58.365" endtime="20221027 17:46:58.366"/>
+</kw>
+<kw name="Set HIGH" library="Insulte_ios_app_resources">
+<arg>Port Number=${Port Number}</arg>
+<arg>portNum=0</arg>
+<arg>pinNum=2</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${portNum}</var>
+<arg>${portNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221027 17:46:58.368" level="INFO">${portNum} = 30</msg>
+<status status="PASS" starttime="20221027 17:46:58.368" endtime="20221027 17:46:58.369"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${pinNum}</var>
+<arg>${pinNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221027 17:46:58.370" level="INFO">${pinNum} = 32</msg>
+<status status="PASS" starttime="20221027 17:46:58.369" endtime="20221027 17:46:58.370"/>
+</kw>
+<kw name="TWI_Write_Byte" library="TWI_Serial_library">
+<arg>Data=54 53 00 16 54 57 10 20 01 00 00 C0 00 00 00 00 FF FF FF FD 53 ${portNum} 2E ${pinNum} 3D 30</arg>
+<arg>Port Number=${Port Number}</arg>
+<doc>TWI KeyWord ,It writes ONE Byte on the serial port
+paramaters: Data -&gt; paramarter will hold the data to be sent
+Port Number -&gt; which port will write the data on
+Encoding -&gt; Encoding type (ascii,utf-8)
+Number of Bytes -&gt; number of bytes will be send
+Returns none</doc>
+<kw name="Write Data" library="SerialLibrary">
+<arg>data=${Data}</arg>
+<arg>encoding=${Encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20221027 17:46:58.372" endtime="20221027 17:46:58.373"/>
+</kw>
+<status status="PASS" starttime="20221027 17:46:58.371" endtime="20221027 17:46:58.373"/>
+</kw>
+<status status="PASS" starttime="20221027 17:46:58.366" endtime="20221027 17:46:58.374"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>10</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221027 17:47:08.376" level="INFO">Slept 10 seconds</msg>
+<status status="PASS" starttime="20221027 17:46:58.374" endtime="20221027 17:47:08.377"/>
+</kw>
+<kw name="Set LOW" library="Insulte_ios_app_resources">
+<arg>Port Number=${Port Number}</arg>
+<arg>portNum=0</arg>
+<arg>pinNum=2</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${portNum}</var>
+<arg>${portNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221027 17:47:08.380" level="INFO">${portNum} = 30</msg>
+<status status="PASS" starttime="20221027 17:47:08.379" endtime="20221027 17:47:08.380"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${pinNum}</var>
+<arg>${pinNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221027 17:47:08.381" level="INFO">${pinNum} = 32</msg>
+<status status="PASS" starttime="20221027 17:47:08.381" endtime="20221027 17:47:08.381"/>
+</kw>
+<kw name="TWI_Write_Byte" library="TWI_Serial_library">
+<arg>Data=54 53 00 16 54 57 10 20 01 00 00 C0 00 00 00 00 FF FF FF FD 53 ${portNum} 2E ${pinNum} 3D 31</arg>
+<arg>Port Number=${Port Number}</arg>
+<doc>TWI KeyWord ,It writes ONE Byte on the serial port
+paramaters: Data -&gt; paramarter will hold the data to be sent
+Port Number -&gt; which port will write the data on
+Encoding -&gt; Encoding type (ascii,utf-8)
+Number of Bytes -&gt; number of bytes will be send
+Returns none</doc>
+<kw name="Write Data" library="SerialLibrary">
+<arg>data=${Data}</arg>
+<arg>encoding=${Encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20221027 17:47:08.384" endtime="20221027 17:47:08.385"/>
+</kw>
+<status status="PASS" starttime="20221027 17:47:08.382" endtime="20221027 17:47:08.385"/>
+</kw>
+<status status="PASS" starttime="20221027 17:47:08.377" endtime="20221027 17:47:08.385"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>5</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221027 17:47:13.387" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20221027 17:47:08.386" endtime="20221027 17:47:13.387"/>
+</kw>
+<status status="PASS" starttime="20221027 17:46:58.362" endtime="20221027 17:47:13.388"/>
+</kw>
+<kw name="Power reset" library="Insulte_ios_app_resources">
+<kw name="Evaluate" library="BuiltIn">
+<var>${message}</var>
+<arg>${BLUE} "\\n-&gt; Power reset"</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221027 17:47:13.391" level="INFO">${message} = [34m
+-&gt; Power reset</msg>
+<status status="PASS" starttime="20221027 17:47:13.390" endtime="20221027 17:47:13.391"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${message}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221027 17:47:13.391" endtime="20221027 17:47:13.392"/>
+</kw>
+<kw name="Set HIGH" library="Insulte_ios_app_resources">
+<arg>Port Number=${Port Number}</arg>
+<arg>portNum=0</arg>
+<arg>pinNum=0</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${portNum}</var>
+<arg>${portNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221027 17:47:13.394" level="INFO">${portNum} = 30</msg>
+<status status="PASS" starttime="20221027 17:47:13.394" endtime="20221027 17:47:13.394"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${pinNum}</var>
+<arg>${pinNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221027 17:47:13.395" level="INFO">${pinNum} = 30</msg>
+<status status="PASS" starttime="20221027 17:47:13.395" endtime="20221027 17:47:13.396"/>
+</kw>
+<kw name="TWI_Write_Byte" library="TWI_Serial_library">
+<arg>Data=54 53 00 16 54 57 10 20 01 00 00 C0 00 00 00 00 FF FF FF FD 53 ${portNum} 2E ${pinNum} 3D 30</arg>
+<arg>Port Number=${Port Number}</arg>
+<doc>TWI KeyWord ,It writes ONE Byte on the serial port
+paramaters: Data -&gt; paramarter will hold the data to be sent
+Port Number -&gt; which port will write the data on
+Encoding -&gt; Encoding type (ascii,utf-8)
+Number of Bytes -&gt; number of bytes will be send
+Returns none</doc>
+<kw name="Write Data" library="SerialLibrary">
+<arg>data=${Data}</arg>
+<arg>encoding=${Encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20221027 17:47:13.397" endtime="20221027 17:47:13.398"/>
+</kw>
+<status status="PASS" starttime="20221027 17:47:13.396" endtime="20221027 17:47:13.398"/>
+</kw>
+<status status="PASS" starttime="20221027 17:47:13.392" endtime="20221027 17:47:13.399"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>5</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221027 17:47:18.400" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20221027 17:47:13.399" endtime="20221027 17:47:18.401"/>
+</kw>
+<kw name="Set LOW" library="Insulte_ios_app_resources">
+<arg>Port Number=${Port Number}</arg>
+<arg>portNum=0</arg>
+<arg>pinNum=0</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${portNum}</var>
+<arg>${portNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221027 17:47:18.404" level="INFO">${portNum} = 30</msg>
+<status status="PASS" starttime="20221027 17:47:18.403" endtime="20221027 17:47:18.404"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${pinNum}</var>
+<arg>${pinNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221027 17:47:18.406" level="INFO">${pinNum} = 30</msg>
+<status status="PASS" starttime="20221027 17:47:18.405" endtime="20221027 17:47:18.406"/>
+</kw>
+<kw name="TWI_Write_Byte" library="TWI_Serial_library">
+<arg>Data=54 53 00 16 54 57 10 20 01 00 00 C0 00 00 00 00 FF FF FF FD 53 ${portNum} 2E ${pinNum} 3D 31</arg>
+<arg>Port Number=${Port Number}</arg>
+<doc>TWI KeyWord ,It writes ONE Byte on the serial port
+paramaters: Data -&gt; paramarter will hold the data to be sent
+Port Number -&gt; which port will write the data on
+Encoding -&gt; Encoding type (ascii,utf-8)
+Number of Bytes -&gt; number of bytes will be send
+Returns none</doc>
+<kw name="Write Data" library="SerialLibrary">
+<arg>data=${Data}</arg>
+<arg>encoding=${Encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20221027 17:47:18.408" endtime="20221027 17:47:18.409"/>
+</kw>
+<status status="PASS" starttime="20221027 17:47:18.406" endtime="20221027 17:47:18.409"/>
+</kw>
+<status status="PASS" starttime="20221027 17:47:18.402" endtime="20221027 17:47:18.410"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>8</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221027 17:47:26.414" level="INFO">Slept 8 seconds</msg>
+<status status="PASS" starttime="20221027 17:47:18.413" endtime="20221027 17:47:26.414"/>
+</kw>
+<status status="PASS" starttime="20221027 17:47:13.389" endtime="20221027 17:47:26.415"/>
+</kw>
+<tag>NXP</tag>
+<status status="PASS" starttime="20221027 17:46:29.284" endtime="20221027 17:47:26.416"/>
+</test>
+<status status="PASS" starttime="20221027 17:46:28.901" endtime="20221027 17:47:26.418"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">NXP</stat>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Serial Command">Serial Command</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
