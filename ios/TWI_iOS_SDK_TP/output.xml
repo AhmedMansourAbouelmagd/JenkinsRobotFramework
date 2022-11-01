@@ -1,0 +1,994 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.0 (Python 3.8.3 on darwin)" generated="20221101 23:00:27.001" rpa="false" schemaversion="3">
+<suite id="s1" name="1-Registration Test Cases" source="/Users/user/Desktop/twi_Repos/JenkinsRobotFramework/ios/TWI_iOS_SDK_TP/Tests/1-Registration_Test_Cases.robot">
+<kw name="initializing everything before start" library="Insulte_ios_app_resources" type="SETUP">
+<kw name="initializing Serial" library="Insulte_ios_app_resources">
+<kw name="Evaluate" library="BuiltIn">
+<var>${message}</var>
+<arg>${BLUE} "\\n-&gt; Initializing Serial communication"</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221101 23:00:27.444" level="INFO">${message} = [34m
+-&gt; Initializing Serial communication</msg>
+<status status="PASS" starttime="20221101 23:00:27.443" endtime="20221101 23:00:27.444"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${message}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221101 23:00:27.444" endtime="20221101 23:00:27.444"/>
+</kw>
+<kw name="TWI_Open_Port" library="TWI_Serial_library">
+<arg>Port Number=${Port Number}</arg>
+<arg>Buad Rate=${Buad Rate}</arg>
+<arg>Encoding=hexlify</arg>
+<arg>timeout=${Time out}</arg>
+<doc>Sets configurations(Port Number,Buad Rate,Encoding and Timeout)
+And Opens passed port</doc>
+<kw name="Add Port" library="SerialLibrary">
+<var>${PortConfigurations}</var>
+<arg>port_locator=${Port Number}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Adds new port with specified locator.</doc>
+<msg timestamp="20221101 23:00:27.448" level="INFO">${PortConfigurations} = Serial&lt;id=0x7fad06ace070, open=True&gt;(port='/dev/tty.usbmodem0006821328461', baudrate=9600, bytesize=8, parity='N', stopbits=1, timeout=10.0, xonxoff=False, rtscts=False, dsrdtr=False)</msg>
+<status status="PASS" starttime="20221101 23:00:27.445" endtime="20221101 23:00:27.448"/>
+</kw>
+<kw name="Port Should Be Open" library="SerialLibrary">
+<arg>${Port Number}</arg>
+<doc>Fails if specified port is closed.</doc>
+<status status="PASS" starttime="20221101 23:00:27.448" endtime="20221101 23:00:27.448"/>
+</kw>
+<kw name="Set Port Parameter" library="SerialLibrary">
+<arg>param_name=baudrate</arg>
+<arg>value=${Buad Rate}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Sets port parameter.</doc>
+<status status="PASS" starttime="20221101 23:00:27.448" endtime="20221101 23:00:27.449"/>
+</kw>
+<kw name="Set Encoding" library="SerialLibrary">
+<arg>encoding=${Encoding}</arg>
+<doc>Sets default encoding for the library instance.</doc>
+<status status="PASS" starttime="20221101 23:00:27.449" endtime="20221101 23:00:27.449"/>
+</kw>
+<status status="PASS" starttime="20221101 23:00:27.444" endtime="20221101 23:00:27.450"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221101 23:00:29.450" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20221101 23:00:27.450" endtime="20221101 23:00:29.451"/>
+</kw>
+<status status="PASS" starttime="20221101 23:00:27.443" endtime="20221101 23:00:29.451"/>
+</kw>
+<kw name="Power on board" library="Insulte_ios_app_resources">
+<kw name="Evaluate" library="BuiltIn">
+<var>${message}</var>
+<arg>${BLUE} "\\n-&gt; Power on board"</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221101 23:00:29.453" level="INFO">${message} = [34m
+-&gt; Power on board</msg>
+<status status="PASS" starttime="20221101 23:00:29.452" endtime="20221101 23:00:29.453"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${message}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221101 23:00:29.454" endtime="20221101 23:00:29.454"/>
+</kw>
+<kw name="Set HIGH" library="Insulte_ios_app_resources">
+<arg>Port Number=${Port Number}</arg>
+<arg>portNum=0</arg>
+<arg>pinNum=3</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${portNum}</var>
+<arg>${portNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221101 23:00:29.456" level="INFO">${portNum} = 30</msg>
+<status status="PASS" starttime="20221101 23:00:29.456" endtime="20221101 23:00:29.456"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${pinNum}</var>
+<arg>${pinNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221101 23:00:29.457" level="INFO">${pinNum} = 33</msg>
+<status status="PASS" starttime="20221101 23:00:29.456" endtime="20221101 23:00:29.457"/>
+</kw>
+<kw name="TWI_Write_Byte" library="TWI_Serial_library">
+<arg>Data=54 53 00 16 54 57 10 20 01 00 00 C0 00 00 00 00 FF FF FF FD 53 ${portNum} 2E ${pinNum} 3D 30</arg>
+<arg>Port Number=${Port Number}</arg>
+<doc>TWI KeyWord ,It writes ONE Byte on the serial port
+paramaters: Data -&gt; paramarter will hold the data to be sent
+Port Number -&gt; which port will write the data on
+Encoding -&gt; Encoding type (ascii,utf-8)
+Number of Bytes -&gt; number of bytes will be send
+Returns none</doc>
+<kw name="Write Data" library="SerialLibrary">
+<arg>data=${Data}</arg>
+<arg>encoding=${Encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20221101 23:00:29.458" endtime="20221101 23:00:29.462"/>
+</kw>
+<status status="PASS" starttime="20221101 23:00:29.457" endtime="20221101 23:00:29.462"/>
+</kw>
+<status status="PASS" starttime="20221101 23:00:29.455" endtime="20221101 23:00:29.462"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>8</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221101 23:00:37.464" level="INFO">Slept 8 seconds</msg>
+<status status="PASS" starttime="20221101 23:00:29.462" endtime="20221101 23:00:37.464"/>
+</kw>
+<status status="PASS" starttime="20221101 23:00:29.451" endtime="20221101 23:00:37.465"/>
+</kw>
+<kw name="Power click" library="Insulte_ios_app_resources">
+<kw name="Evaluate" library="BuiltIn">
+<var>${message}</var>
+<arg>${BLUE} "\\n-&gt; Power click"</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221101 23:00:37.467" level="INFO">${message} = [34m
+-&gt; Power click</msg>
+<status status="PASS" starttime="20221101 23:00:37.466" endtime="20221101 23:00:37.467"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${message}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221101 23:00:37.467" endtime="20221101 23:00:37.468"/>
+</kw>
+<kw name="Set HIGH" library="Insulte_ios_app_resources">
+<arg>Port Number=${Port Number}</arg>
+<arg>portNum=0</arg>
+<arg>pinNum=0</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${portNum}</var>
+<arg>${portNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221101 23:00:37.469" level="INFO">${portNum} = 30</msg>
+<status status="PASS" starttime="20221101 23:00:37.469" endtime="20221101 23:00:37.470"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${pinNum}</var>
+<arg>${pinNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221101 23:00:37.470" level="INFO">${pinNum} = 30</msg>
+<status status="PASS" starttime="20221101 23:00:37.470" endtime="20221101 23:00:37.470"/>
+</kw>
+<kw name="TWI_Write_Byte" library="TWI_Serial_library">
+<arg>Data=54 53 00 16 54 57 10 20 01 00 00 C0 00 00 00 00 FF FF FF FD 53 ${portNum} 2E ${pinNum} 3D 30</arg>
+<arg>Port Number=${Port Number}</arg>
+<doc>TWI KeyWord ,It writes ONE Byte on the serial port
+paramaters: Data -&gt; paramarter will hold the data to be sent
+Port Number -&gt; which port will write the data on
+Encoding -&gt; Encoding type (ascii,utf-8)
+Number of Bytes -&gt; number of bytes will be send
+Returns none</doc>
+<kw name="Write Data" library="SerialLibrary">
+<arg>data=${Data}</arg>
+<arg>encoding=${Encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20221101 23:00:37.472" endtime="20221101 23:00:37.473"/>
+</kw>
+<status status="PASS" starttime="20221101 23:00:37.470" endtime="20221101 23:00:37.473"/>
+</kw>
+<status status="PASS" starttime="20221101 23:00:37.468" endtime="20221101 23:00:37.473"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221101 23:00:39.474" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20221101 23:00:37.473" endtime="20221101 23:00:39.475"/>
+</kw>
+<kw name="Set LOW" library="Insulte_ios_app_resources">
+<arg>Port Number=${Port Number}</arg>
+<arg>portNum=0</arg>
+<arg>pinNum=0</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${portNum}</var>
+<arg>${portNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221101 23:00:39.477" level="INFO">${portNum} = 30</msg>
+<status status="PASS" starttime="20221101 23:00:39.476" endtime="20221101 23:00:39.477"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${pinNum}</var>
+<arg>${pinNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221101 23:00:39.478" level="INFO">${pinNum} = 30</msg>
+<status status="PASS" starttime="20221101 23:00:39.477" endtime="20221101 23:00:39.478"/>
+</kw>
+<kw name="TWI_Write_Byte" library="TWI_Serial_library">
+<arg>Data=54 53 00 16 54 57 10 20 01 00 00 C0 00 00 00 00 FF FF FF FD 53 ${portNum} 2E ${pinNum} 3D 31</arg>
+<arg>Port Number=${Port Number}</arg>
+<doc>TWI KeyWord ,It writes ONE Byte on the serial port
+paramaters: Data -&gt; paramarter will hold the data to be sent
+Port Number -&gt; which port will write the data on
+Encoding -&gt; Encoding type (ascii,utf-8)
+Number of Bytes -&gt; number of bytes will be send
+Returns none</doc>
+<kw name="Write Data" library="SerialLibrary">
+<arg>data=${Data}</arg>
+<arg>encoding=${Encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20221101 23:00:39.479" endtime="20221101 23:00:39.480"/>
+</kw>
+<status status="PASS" starttime="20221101 23:00:39.478" endtime="20221101 23:00:39.480"/>
+</kw>
+<status status="PASS" starttime="20221101 23:00:39.475" endtime="20221101 23:00:39.481"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>4</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221101 23:00:43.481" level="INFO">Slept 4 seconds</msg>
+<status status="PASS" starttime="20221101 23:00:39.481" endtime="20221101 23:00:43.482"/>
+</kw>
+<status status="PASS" starttime="20221101 23:00:37.465" endtime="20221101 23:00:43.482"/>
+</kw>
+<kw name="Clear caches" library="Insulte_ios_app_resources">
+<kw name="Evaluate" library="BuiltIn">
+<var>${message}</var>
+<arg>${BLUE} "\\n-&gt; Clear caches"</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221101 23:00:43.484" level="INFO">${message} = [34m
+-&gt; Clear caches</msg>
+<status status="PASS" starttime="20221101 23:00:43.484" endtime="20221101 23:00:43.484"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${message}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221101 23:00:43.485" endtime="20221101 23:00:43.485"/>
+</kw>
+<kw name="Set HIGH" library="Insulte_ios_app_resources">
+<arg>Port Number=${Port Number}</arg>
+<arg>portNum=0</arg>
+<arg>pinNum=2</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${portNum}</var>
+<arg>${portNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221101 23:00:43.487" level="INFO">${portNum} = 30</msg>
+<status status="PASS" starttime="20221101 23:00:43.486" endtime="20221101 23:00:43.487"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${pinNum}</var>
+<arg>${pinNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221101 23:00:43.487" level="INFO">${pinNum} = 32</msg>
+<status status="PASS" starttime="20221101 23:00:43.487" endtime="20221101 23:00:43.487"/>
+</kw>
+<kw name="TWI_Write_Byte" library="TWI_Serial_library">
+<arg>Data=54 53 00 16 54 57 10 20 01 00 00 C0 00 00 00 00 FF FF FF FD 53 ${portNum} 2E ${pinNum} 3D 30</arg>
+<arg>Port Number=${Port Number}</arg>
+<doc>TWI KeyWord ,It writes ONE Byte on the serial port
+paramaters: Data -&gt; paramarter will hold the data to be sent
+Port Number -&gt; which port will write the data on
+Encoding -&gt; Encoding type (ascii,utf-8)
+Number of Bytes -&gt; number of bytes will be send
+Returns none</doc>
+<kw name="Write Data" library="SerialLibrary">
+<arg>data=${Data}</arg>
+<arg>encoding=${Encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20221101 23:00:43.489" endtime="20221101 23:00:43.490"/>
+</kw>
+<status status="PASS" starttime="20221101 23:00:43.488" endtime="20221101 23:00:43.490"/>
+</kw>
+<status status="PASS" starttime="20221101 23:00:43.485" endtime="20221101 23:00:43.490"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>10</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221101 23:00:53.492" level="INFO">Slept 10 seconds</msg>
+<status status="PASS" starttime="20221101 23:00:43.490" endtime="20221101 23:00:53.492"/>
+</kw>
+<kw name="Set LOW" library="Insulte_ios_app_resources">
+<arg>Port Number=${Port Number}</arg>
+<arg>portNum=0</arg>
+<arg>pinNum=2</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${portNum}</var>
+<arg>${portNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221101 23:00:53.493" level="INFO">${portNum} = 30</msg>
+<status status="PASS" starttime="20221101 23:00:53.493" endtime="20221101 23:00:53.493"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${pinNum}</var>
+<arg>${pinNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221101 23:00:53.493" level="INFO">${pinNum} = 32</msg>
+<status status="PASS" starttime="20221101 23:00:53.493" endtime="20221101 23:00:53.493"/>
+</kw>
+<kw name="TWI_Write_Byte" library="TWI_Serial_library">
+<arg>Data=54 53 00 16 54 57 10 20 01 00 00 C0 00 00 00 00 FF FF FF FD 53 ${portNum} 2E ${pinNum} 3D 31</arg>
+<arg>Port Number=${Port Number}</arg>
+<doc>TWI KeyWord ,It writes ONE Byte on the serial port
+paramaters: Data -&gt; paramarter will hold the data to be sent
+Port Number -&gt; which port will write the data on
+Encoding -&gt; Encoding type (ascii,utf-8)
+Number of Bytes -&gt; number of bytes will be send
+Returns none</doc>
+<kw name="Write Data" library="SerialLibrary">
+<arg>data=${Data}</arg>
+<arg>encoding=${Encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20221101 23:00:53.494" endtime="20221101 23:00:53.495"/>
+</kw>
+<status status="PASS" starttime="20221101 23:00:53.494" endtime="20221101 23:00:53.495"/>
+</kw>
+<status status="PASS" starttime="20221101 23:00:53.492" endtime="20221101 23:00:53.495"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>5</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221101 23:00:58.496" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20221101 23:00:53.495" endtime="20221101 23:00:58.496"/>
+</kw>
+<status status="PASS" starttime="20221101 23:00:43.483" endtime="20221101 23:00:58.497"/>
+</kw>
+<kw name="Power reset" library="Insulte_ios_app_resources">
+<kw name="Evaluate" library="BuiltIn">
+<var>${message}</var>
+<arg>${BLUE} "\\n-&gt; Power reset"</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221101 23:00:58.498" level="INFO">${message} = [34m
+-&gt; Power reset</msg>
+<status status="PASS" starttime="20221101 23:00:58.498" endtime="20221101 23:00:58.498"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${message}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221101 23:00:58.499" endtime="20221101 23:00:58.500"/>
+</kw>
+<kw name="Set HIGH" library="Insulte_ios_app_resources">
+<arg>Port Number=${Port Number}</arg>
+<arg>portNum=0</arg>
+<arg>pinNum=0</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${portNum}</var>
+<arg>${portNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221101 23:00:58.503" level="INFO">${portNum} = 30</msg>
+<status status="PASS" starttime="20221101 23:00:58.501" endtime="20221101 23:00:58.503"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${pinNum}</var>
+<arg>${pinNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221101 23:00:58.504" level="INFO">${pinNum} = 30</msg>
+<status status="PASS" starttime="20221101 23:00:58.504" endtime="20221101 23:00:58.504"/>
+</kw>
+<kw name="TWI_Write_Byte" library="TWI_Serial_library">
+<arg>Data=54 53 00 16 54 57 10 20 01 00 00 C0 00 00 00 00 FF FF FF FD 53 ${portNum} 2E ${pinNum} 3D 30</arg>
+<arg>Port Number=${Port Number}</arg>
+<doc>TWI KeyWord ,It writes ONE Byte on the serial port
+paramaters: Data -&gt; paramarter will hold the data to be sent
+Port Number -&gt; which port will write the data on
+Encoding -&gt; Encoding type (ascii,utf-8)
+Number of Bytes -&gt; number of bytes will be send
+Returns none</doc>
+<kw name="Write Data" library="SerialLibrary">
+<arg>data=${Data}</arg>
+<arg>encoding=${Encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20221101 23:00:58.506" endtime="20221101 23:00:58.507"/>
+</kw>
+<status status="PASS" starttime="20221101 23:00:58.505" endtime="20221101 23:00:58.507"/>
+</kw>
+<status status="PASS" starttime="20221101 23:00:58.500" endtime="20221101 23:00:58.507"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>5</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221101 23:01:03.509" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20221101 23:00:58.508" endtime="20221101 23:01:03.509"/>
+</kw>
+<kw name="Set LOW" library="Insulte_ios_app_resources">
+<arg>Port Number=${Port Number}</arg>
+<arg>portNum=0</arg>
+<arg>pinNum=0</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${portNum}</var>
+<arg>${portNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221101 23:01:03.512" level="INFO">${portNum} = 30</msg>
+<status status="PASS" starttime="20221101 23:01:03.511" endtime="20221101 23:01:03.512"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${pinNum}</var>
+<arg>${pinNum}+30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221101 23:01:03.513" level="INFO">${pinNum} = 30</msg>
+<status status="PASS" starttime="20221101 23:01:03.512" endtime="20221101 23:01:03.513"/>
+</kw>
+<kw name="TWI_Write_Byte" library="TWI_Serial_library">
+<arg>Data=54 53 00 16 54 57 10 20 01 00 00 C0 00 00 00 00 FF FF FF FD 53 ${portNum} 2E ${pinNum} 3D 31</arg>
+<arg>Port Number=${Port Number}</arg>
+<doc>TWI KeyWord ,It writes ONE Byte on the serial port
+paramaters: Data -&gt; paramarter will hold the data to be sent
+Port Number -&gt; which port will write the data on
+Encoding -&gt; Encoding type (ascii,utf-8)
+Number of Bytes -&gt; number of bytes will be send
+Returns none</doc>
+<kw name="Write Data" library="SerialLibrary">
+<arg>data=${Data}</arg>
+<arg>encoding=${Encoding}</arg>
+<arg>port_locator=${Port Number}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20221101 23:01:03.515" endtime="20221101 23:01:03.516"/>
+</kw>
+<status status="PASS" starttime="20221101 23:01:03.513" endtime="20221101 23:01:03.516"/>
+</kw>
+<status status="PASS" starttime="20221101 23:01:03.510" endtime="20221101 23:01:03.516"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>8</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221101 23:01:11.518" level="INFO">Slept 8 seconds</msg>
+<status status="PASS" starttime="20221101 23:01:03.516" endtime="20221101 23:01:11.518"/>
+</kw>
+<status status="PASS" starttime="20221101 23:00:58.497" endtime="20221101 23:01:11.518"/>
+</kw>
+<status status="PASS" starttime="20221101 23:00:27.443" endtime="20221101 23:01:11.519"/>
+</kw>
+<test id="s1-t1" name="Test Case 1" line="7">
+<kw name="setup and open appdm app" library="Insulte_ios_app_resources">
+<kw name="Open Application" library="AppiumLibrary">
+<arg>${APPIUM_SERVER}</arg>
+<arg>platformName=iOS</arg>
+<arg>platformVersion=${version}</arg>
+<arg>deviceName=${deviceName}</arg>
+<arg>app=${app_appdm}</arg>
+<arg>udid=${udid}</arg>
+<arg>xcodeOrgId=${xcodeOrgId}</arg>
+<arg>automationName=${automationName}</arg>
+<arg>xcodeSigningId=${xcodeSigningId}</arg>
+<arg>useNewWDA =false</arg>
+<arg>waitForIdleTimeout =0</arg>
+<arg>usePrebuiltWDA=false</arg>
+<arg>derivedDataPath=/Users/user/Library/Developer/Xcode/DerivedData/WebDriverAgent-eefnhsnbzqkaizbywdkxfgbhslib</arg>
+<arg>noReset=true</arg>
+<arg>wdaLocalPort=8100</arg>
+<doc>Opens a new application to given Appium server.
+Capabilities of appium server, Android and iOS,
+Please check https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/server-args.md
+| *Option*            | *Man.* | *Description*     |
+| remote_url          | Yes    | Appium server url |
+| alias               | no     | alias             |
+| strict_ssl          | No     | allows you to send commands to an invalid certificate host like a self-signed one. |</doc>
+<status status="PASS" starttime="20221101 23:01:11.522" endtime="20221101 23:01:12.103"/>
+</kw>
+<status status="PASS" starttime="20221101 23:01:11.521" endtime="20221101 23:01:12.103"/>
+</kw>
+<kw name="Click Element" library="AppiumLibrary">
+<arg>accessibility_id=RegisterMyPhoneBtn</arg>
+<doc>Click element identified by `locator`.</doc>
+<msg timestamp="20221101 23:01:12.105" level="INFO">Clicking element 'accessibility_id=RegisterMyPhoneBtn'.</msg>
+<status status="PASS" starttime="20221101 23:01:12.103" endtime="20221101 23:01:12.651"/>
+</kw>
+<kw name="Page Should Contain Element" library="AppiumLibrary">
+<arg>accessibility_id=Validating your device</arg>
+<doc>Verifies that current page contains `locator` element.</doc>
+<msg timestamp="20221101 23:01:12.787" level="INFO">Current page contains element 'accessibility_id=Validating your device'.</msg>
+<status status="PASS" starttime="20221101 23:01:12.652" endtime="20221101 23:01:12.787"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="AppiumLibrary">
+<arg>accessibility_id=ResetSDKBtn</arg>
+<arg>90s</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" starttime="20221101 23:01:12.787" endtime="20221101 23:01:29.422"/>
+</kw>
+<kw name="Click Element" library="AppiumLibrary">
+<arg>accessibility_id=ResetSDKBtn</arg>
+<doc>Click element identified by `locator`.</doc>
+<msg timestamp="20221101 23:01:29.424" level="INFO">Clicking element 'accessibility_id=ResetSDKBtn'.</msg>
+<status status="PASS" starttime="20221101 23:01:29.422" endtime="20221101 23:01:30.227"/>
+</kw>
+<doc>Testing that the registration process is successful without phone number.</doc>
+<tag>APPDM IOS APP</tag>
+<status status="PASS" starttime="20221101 23:01:11.519" endtime="20221101 23:01:30.227"/>
+</test>
+<test id="s1-t2" name="Test Case 2" line="15">
+<kw name="toggle wifi" library="Insulte_ios_app_resources">
+<kw name="Swipe" library="AppiumLibrary">
+<arg>350</arg>
+<arg>5</arg>
+<arg>350</arg>
+<arg>100</arg>
+<arg>100</arg>
+<doc>Swipe from one point to another point, for an optional duration.</doc>
+<status status="PASS" starttime="20221101 23:01:30.229" endtime="20221101 23:01:30.745"/>
+</kw>
+<kw name="Click Element" library="AppiumLibrary">
+<arg>accessibility_id=wifi-button</arg>
+<doc>Click element identified by `locator`.</doc>
+<msg timestamp="20221101 23:01:30.749" level="INFO">Clicking element 'accessibility_id=wifi-button'.</msg>
+<status status="PASS" starttime="20221101 23:01:30.745" endtime="20221101 23:01:31.649"/>
+</kw>
+<kw name="Swipe" library="AppiumLibrary">
+<arg>350</arg>
+<arg>600</arg>
+<arg>350</arg>
+<arg>580</arg>
+<arg>100</arg>
+<doc>Swipe from one point to another point, for an optional duration.</doc>
+<status status="PASS" starttime="20221101 23:01:31.650" endtime="20221101 23:01:32.546"/>
+</kw>
+<status status="PASS" starttime="20221101 23:01:30.229" endtime="20221101 23:01:32.547"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="AppiumLibrary">
+<arg>accessibility_id=RegisterMyPhoneBtn</arg>
+<arg>10s</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" starttime="20221101 23:01:32.547" endtime="20221101 23:01:32.721"/>
+</kw>
+<kw name="Click Element" library="AppiumLibrary">
+<arg>accessibility_id=RegisterMyPhoneBtn</arg>
+<doc>Click element identified by `locator`.</doc>
+<msg timestamp="20221101 23:01:32.724" level="INFO">Clicking element 'accessibility_id=RegisterMyPhoneBtn'.</msg>
+<status status="PASS" starttime="20221101 23:01:32.722" endtime="20221101 23:01:33.237"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="AppiumLibrary">
+<arg>accessibility_id=No Internet connection.</arg>
+<arg>20s</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" starttime="20221101 23:01:33.241" endtime="20221101 23:01:33.464"/>
+</kw>
+<kw name="Click Element" library="AppiumLibrary">
+<arg>accessibility_id=Ok</arg>
+<doc>Click element identified by `locator`.</doc>
+<msg timestamp="20221101 23:01:33.467" level="INFO">Clicking element 'accessibility_id=Ok'.</msg>
+<status status="PASS" starttime="20221101 23:01:33.464" endtime="20221101 23:01:34.300"/>
+</kw>
+<kw name="toggle wifi" library="Insulte_ios_app_resources">
+<kw name="Swipe" library="AppiumLibrary">
+<arg>350</arg>
+<arg>5</arg>
+<arg>350</arg>
+<arg>100</arg>
+<arg>100</arg>
+<doc>Swipe from one point to another point, for an optional duration.</doc>
+<status status="PASS" starttime="20221101 23:01:34.300" endtime="20221101 23:01:34.813"/>
+</kw>
+<kw name="Click Element" library="AppiumLibrary">
+<arg>accessibility_id=wifi-button</arg>
+<doc>Click element identified by `locator`.</doc>
+<msg timestamp="20221101 23:01:34.817" level="INFO">Clicking element 'accessibility_id=wifi-button'.</msg>
+<status status="PASS" starttime="20221101 23:01:34.813" endtime="20221101 23:01:35.763"/>
+</kw>
+<kw name="Swipe" library="AppiumLibrary">
+<arg>350</arg>
+<arg>600</arg>
+<arg>350</arg>
+<arg>580</arg>
+<arg>100</arg>
+<doc>Swipe from one point to another point, for an optional duration.</doc>
+<status status="PASS" starttime="20221101 23:01:35.763" endtime="20221101 23:01:36.767"/>
+</kw>
+<status status="PASS" starttime="20221101 23:01:34.300" endtime="20221101 23:01:36.767"/>
+</kw>
+<doc>Testing that the registration process will fail if there is no internet connection.</doc>
+<tag>APPDM IOS APP</tag>
+<status status="PASS" starttime="20221101 23:01:30.228" endtime="20221101 23:01:36.767"/>
+</test>
+<test id="s1-t3" name="Test Case 3" line="24">
+<kw name="turn Passcode Off" library="Insulte_ios_app_resources">
+<kw name="open settings app" library="Insulte_ios_app_resources">
+<kw name="Open Application" library="AppiumLibrary">
+<arg>${APPIUM_SERVER}</arg>
+<arg>platformName=iOS</arg>
+<arg>platformVersion=${version}</arg>
+<arg>deviceName=${deviceName}</arg>
+<arg>app=${app_settings}</arg>
+<arg>udid=${udid}</arg>
+<arg>xcodeOrgId=${xcodeOrgId}</arg>
+<arg>automationName=${automationName}</arg>
+<arg>xcodeSigningId=${xcodeSigningId}</arg>
+<arg>useNewWDA =false</arg>
+<arg>usePrebuiltWDA=false</arg>
+<arg>waitForIdleTimeout =0</arg>
+<arg>derivedDataPath=/Users/user/Library/Developer/Xcode/DerivedData/WebDriverAgent-eefnhsnbzqkaizbywdkxfgbhslib</arg>
+<arg>wdaLocalPort=8100</arg>
+<doc>Opens a new application to given Appium server.
+Capabilities of appium server, Android and iOS,
+Please check https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/server-args.md
+| *Option*            | *Man.* | *Description*     |
+| remote_url          | Yes    | Appium server url |
+| alias               | no     | alias             |
+| strict_ssl          | No     | allows you to send commands to an invalid certificate host like a self-signed one. |</doc>
+<status status="PASS" starttime="20221101 23:01:36.769" endtime="20221101 23:01:38.672"/>
+</kw>
+<status status="PASS" starttime="20221101 23:01:36.769" endtime="20221101 23:01:38.672"/>
+</kw>
+<kw name="Click Element" library="AppiumLibrary">
+<arg>Face ID &amp; Passcode</arg>
+<doc>Click element identified by `locator`.</doc>
+<msg timestamp="20221101 23:01:38.674" level="INFO">Clicking element 'Face ID &amp; Passcode'.</msg>
+<msg timestamp="20221101 23:01:40.801" level="INFO">criteria is Face ID &amp; Passcode</msg>
+<status status="PASS" starttime="20221101 23:01:38.672" endtime="20221101 23:01:40.801"/>
+</kw>
+<kw name="Input Password" library="AppiumLibrary">
+<arg>accessibility_id=Passcode</arg>
+<arg>134679</arg>
+<doc>Types the given password into text field identified by `locator`.</doc>
+<msg timestamp="20221101 23:01:40.805" level="INFO">Typing password into text field 'accessibility_id=Passcode'</msg>
+<status status="PASS" starttime="20221101 23:01:40.801" endtime="20221101 23:01:41.903"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221101 23:01:42.404" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20221101 23:01:41.903" endtime="20221101 23:01:42.405"/>
+</kw>
+<kw name="Click Text" library="AppiumLibrary">
+<arg>Turn Passcode Off</arg>
+<doc>Click text identified by ``text``.</doc>
+<msg timestamp="20221101 23:01:44.059" level="INFO">criteria is Turn Passcode Off</msg>
+<status status="PASS" starttime="20221101 23:01:42.405" endtime="20221101 23:01:44.059"/>
+</kw>
+<kw name="Input Password" library="AppiumLibrary">
+<arg>accessibility_id=Passcode</arg>
+<arg>134679</arg>
+<doc>Types the given password into text field identified by `locator`.</doc>
+<msg timestamp="20221101 23:01:44.061" level="INFO">Typing password into text field 'accessibility_id=Passcode'</msg>
+<status status="PASS" starttime="20221101 23:01:44.059" endtime="20221101 23:01:45.131"/>
+</kw>
+<status status="PASS" starttime="20221101 23:01:36.768" endtime="20221101 23:01:45.132"/>
+</kw>
+<kw name="setup and open appdm app" library="Insulte_ios_app_resources">
+<kw name="Open Application" library="AppiumLibrary">
+<arg>${APPIUM_SERVER}</arg>
+<arg>platformName=iOS</arg>
+<arg>platformVersion=${version}</arg>
+<arg>deviceName=${deviceName}</arg>
+<arg>app=${app_appdm}</arg>
+<arg>udid=${udid}</arg>
+<arg>xcodeOrgId=${xcodeOrgId}</arg>
+<arg>automationName=${automationName}</arg>
+<arg>xcodeSigningId=${xcodeSigningId}</arg>
+<arg>useNewWDA =false</arg>
+<arg>waitForIdleTimeout =0</arg>
+<arg>usePrebuiltWDA=false</arg>
+<arg>derivedDataPath=/Users/user/Library/Developer/Xcode/DerivedData/WebDriverAgent-eefnhsnbzqkaizbywdkxfgbhslib</arg>
+<arg>noReset=true</arg>
+<arg>wdaLocalPort=8100</arg>
+<doc>Opens a new application to given Appium server.
+Capabilities of appium server, Android and iOS,
+Please check https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/server-args.md
+| *Option*            | *Man.* | *Description*     |
+| remote_url          | Yes    | Appium server url |
+| alias               | no     | alias             |
+| strict_ssl          | No     | allows you to send commands to an invalid certificate host like a self-signed one. |</doc>
+<status status="PASS" starttime="20221101 23:01:45.132" endtime="20221101 23:01:50.327"/>
+</kw>
+<status status="PASS" starttime="20221101 23:01:45.132" endtime="20221101 23:01:50.328"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="AppiumLibrary">
+<arg>accessibility_id=RegisterMyPhoneBtn</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" starttime="20221101 23:01:50.328" endtime="20221101 23:01:50.482"/>
+</kw>
+<kw name="Click Element" library="AppiumLibrary">
+<arg>accessibility_id=RegisterMyPhoneBtn</arg>
+<doc>Click element identified by `locator`.</doc>
+<msg timestamp="20221101 23:01:50.486" level="INFO">Clicking element 'accessibility_id=RegisterMyPhoneBtn'.</msg>
+<status status="PASS" starttime="20221101 23:01:50.483" endtime="20221101 23:01:50.989"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="AppiumLibrary">
+<arg>accessibility_id=Biometry Id Not Enabled.</arg>
+<arg>30s</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" starttime="20221101 23:01:50.989" endtime="20221101 23:01:56.613"/>
+</kw>
+<kw name="Click Element" library="AppiumLibrary">
+<arg>accessibility_id=Ok</arg>
+<doc>Click element identified by `locator`.</doc>
+<msg timestamp="20221101 23:01:56.615" level="INFO">Clicking element 'accessibility_id=Ok'.</msg>
+<status status="PASS" starttime="20221101 23:01:56.613" endtime="20221101 23:01:57.422"/>
+</kw>
+<doc>Testing that the phone doesn’t have a passcode and the cloud app requires the primary key.</doc>
+<tag>APPDM IOS APP</tag>
+<status status="PASS" starttime="20221101 23:01:36.768" endtime="20221101 23:01:57.422"/>
+</test>
+<test id="s1-t4" name="Test Case 4" line="34">
+<kw name="disable primary key from cloud app" library="Insulte_ios_app_resources">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>https://twi-services.com/twi-cloud-portal-r2/#/login</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20221101 23:01:57.424" level="INFO">Opening browser 'chrome' to base url 'https://twi-services.com/twi-cloud-portal-r2/#/login'.</msg>
+<status status="PASS" starttime="20221101 23:01:57.423" endtime="20221101 23:02:02.898"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>name=email</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20221101 23:02:02.899" endtime="20221101 23:02:02.929"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>name=email</arg>
+<arg>text=admin@thirdwayv.com</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221101 23:02:02.929" level="INFO">Typing text 'admin@thirdwayv.com' into text field 'name=email'.</msg>
+<status status="PASS" starttime="20221101 23:02:02.929" endtime="20221101 23:02:03.046"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>name=password</arg>
+<arg>text=Admin!123</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221101 23:02:03.046" level="INFO">Typing text 'Admin!123' into text field 'name=password'.</msg>
+<status status="PASS" starttime="20221101 23:02:03.046" endtime="20221101 23:02:03.121"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>id=loginButton</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20221101 23:02:03.122" level="INFO">Clicking button 'id=loginButton'.</msg>
+<status status="PASS" starttime="20221101 23:02:03.122" endtime="20221101 23:02:03.195"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>id=mat-input-0</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20221101 23:02:03.195" endtime="20221101 23:02:04.953"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>id=mat-input-0</arg>
+<arg>text=a36ae445bfd34a52ffa2e414</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221101 23:02:04.953" level="INFO">Typing text 'a36ae445bfd34a52ffa2e414' into text field 'id=mat-input-0'.</msg>
+<status status="PASS" starttime="20221101 23:02:04.953" endtime="20221101 23:02:05.133"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221101 23:02:06.135" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20221101 23:02:05.133" endtime="20221101 23:02:06.135"/>
+</kw>
+<kw name="Press Keys" library="SeleniumLibrary">
+<arg>id=mat-input-0</arg>
+<arg>RETURN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<msg timestamp="20221101 23:02:06.137" level="INFO">Sending key(s) ('RETURN',) to id=mat-input-0 element.</msg>
+<msg timestamp="20221101 23:02:06.423" level="INFO">Pressing special key RETURN to element.</msg>
+<msg timestamp="20221101 23:02:06.423" level="INFO">Releasing special key RETURN.</msg>
+<status status="PASS" starttime="20221101 23:02:06.135" endtime="20221101 23:02:06.441"/>
+</kw>
+<kw name="Press Keys" library="SeleniumLibrary">
+<arg>id=mat-input-0</arg>
+<arg>RETURN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<msg timestamp="20221101 23:02:06.442" level="INFO">Sending key(s) ('RETURN',) to id=mat-input-0 element.</msg>
+<msg timestamp="20221101 23:02:06.724" level="INFO">Pressing special key RETURN to element.</msg>
+<msg timestamp="20221101 23:02:06.725" level="INFO">Releasing special key RETURN.</msg>
+<status status="PASS" starttime="20221101 23:02:06.441" endtime="20221101 23:02:06.736"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221101 23:02:08.738" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20221101 23:02:06.736" endtime="20221101 23:02:08.738"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>edit</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20221101 23:02:08.739" level="INFO">Clicking button 'edit'.</msg>
+<status status="PASS" starttime="20221101 23:02:08.738" endtime="20221101 23:02:08.858"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221101 23:02:10.860" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20221101 23:02:08.859" endtime="20221101 23:02:10.860"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>id=Group_1</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20221101 23:02:10.862" level="INFO">Clicking element 'id=Group_1'.</msg>
+<status status="PASS" starttime="20221101 23:02:10.861" endtime="20221101 23:02:10.937"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>id=mat-option-8</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20221101 23:02:10.938" level="INFO">Clicking element 'id=mat-option-8'.</msg>
+<status status="PASS" starttime="20221101 23:02:10.937" endtime="20221101 23:02:10.976"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221101 23:02:11.977" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20221101 23:02:10.976" endtime="20221101 23:02:11.977"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>Edit</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20221101 23:02:11.979" level="INFO">Clicking button 'Edit'.</msg>
+<status status="PASS" starttime="20221101 23:02:11.978" endtime="20221101 23:02:12.048"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221101 23:02:13.050" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20221101 23:02:12.048" endtime="20221101 23:02:13.050"/>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20221101 23:02:13.050" endtime="20221101 23:02:13.144"/>
+</kw>
+<status status="PASS" starttime="20221101 23:01:57.423" endtime="20221101 23:02:13.144"/>
+</kw>
+<kw name="setup and open appdm app" library="Insulte_ios_app_resources">
+<kw name="Open Application" library="AppiumLibrary">
+<arg>${APPIUM_SERVER}</arg>
+<arg>platformName=iOS</arg>
+<arg>platformVersion=${version}</arg>
+<arg>deviceName=${deviceName}</arg>
+<arg>app=${app_appdm}</arg>
+<arg>udid=${udid}</arg>
+<arg>xcodeOrgId=${xcodeOrgId}</arg>
+<arg>automationName=${automationName}</arg>
+<arg>xcodeSigningId=${xcodeSigningId}</arg>
+<arg>useNewWDA =false</arg>
+<arg>waitForIdleTimeout =0</arg>
+<arg>usePrebuiltWDA=false</arg>
+<arg>derivedDataPath=/Users/user/Library/Developer/Xcode/DerivedData/WebDriverAgent-eefnhsnbzqkaizbywdkxfgbhslib</arg>
+<arg>noReset=true</arg>
+<arg>wdaLocalPort=8100</arg>
+<doc>Opens a new application to given Appium server.
+Capabilities of appium server, Android and iOS,
+Please check https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/server-args.md
+| *Option*            | *Man.* | *Description*     |
+| remote_url          | Yes    | Appium server url |
+| alias               | no     | alias             |
+| strict_ssl          | No     | allows you to send commands to an invalid certificate host like a self-signed one. |</doc>
+<status status="PASS" starttime="20221101 23:02:13.145" endtime="20221101 23:02:13.724"/>
+</kw>
+<status status="PASS" starttime="20221101 23:02:13.145" endtime="20221101 23:02:13.724"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="AppiumLibrary">
+<arg>accessibility_id=RegisterMyPhoneBtn</arg>
+<arg>10s</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" starttime="20221101 23:02:13.725" endtime="20221101 23:02:13.897"/>
+</kw>
+<kw name="Click Element" library="AppiumLibrary">
+<arg>accessibility_id=RegisterMyPhoneBtn</arg>
+<doc>Click element identified by `locator`.</doc>
+<msg timestamp="20221101 23:02:13.900" level="INFO">Clicking element 'accessibility_id=RegisterMyPhoneBtn'.</msg>
+<status status="PASS" starttime="20221101 23:02:13.897" endtime="20221101 23:02:14.416"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="AppiumLibrary">
+<arg>accessibility_id=ResetSDKBtn</arg>
+<arg>90s</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" starttime="20221101 23:02:14.416" endtime="20221101 23:02:30.059"/>
+</kw>
+<kw name="Click Element" library="AppiumLibrary">
+<arg>accessibility_id=ResetSDKBtn</arg>
+<doc>Click element identified by `locator`.</doc>
+<msg timestamp="20221101 23:02:30.062" level="INFO">Clicking element 'accessibility_id=ResetSDKBtn'.</msg>
+<status status="PASS" starttime="20221101 23:02:30.059" endtime="20221101 23:02:30.821"/>
+</kw>
+<kw name="enable primary key from cloud app" library="Insulte_ios_app_resources">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>https://twi-services.com/twi-cloud-portal-r2/#/login</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20221101 23:02:30.822" level="INFO">Opening browser 'chrome' to base url 'https://twi-services.com/twi-cloud-portal-r2/#/login'.</msg>
+<status status="PASS" starttime="20221101 23:02:30.822" endtime="20221101 23:02:36.572"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>name=email</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20221101 23:02:36.572" endtime="20221101 23:02:36.603"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>name=email</arg>
+<arg>text=admin@thirdwayv.com</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221101 23:02:36.604" level="INFO">Typing text 'admin@thirdwayv.com' into text field 'name=email'.</msg>
+<status status="PASS" starttime="20221101 23:02:36.603" endtime="20221101 23:02:36.697"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>name=password</arg>
+<arg>text=Admin!123</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221101 23:02:36.697" level="INFO">Typing text 'Admin!123' into text field 'name=password'.</msg>
+<status status="PASS" starttime="20221101 23:02:36.697" endtime="20221101 23:02:36.761"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>id=loginButton</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20221101 23:02:36.762" level="INFO">Clicking button 'id=loginButton'.</msg>
+<status status="PASS" starttime="20221101 23:02:36.761" endtime="20221101 23:02:36.814"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>id=mat-input-0</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20221101 23:02:36.814" endtime="20221101 23:02:38.545"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>id=mat-input-0</arg>
+<arg>text=a36ae445bfd34a52ffa2e414</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221101 23:02:38.545" level="INFO">Typing text 'a36ae445bfd34a52ffa2e414' into text field 'id=mat-input-0'.</msg>
+<status status="PASS" starttime="20221101 23:02:38.545" endtime="20221101 23:02:38.717"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221101 23:02:39.717" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20221101 23:02:38.717" endtime="20221101 23:02:39.718"/>
+</kw>
+<kw name="Press Keys" library="SeleniumLibrary">
+<arg>id=mat-input-0</arg>
+<arg>RETURN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<msg timestamp="20221101 23:02:39.720" level="INFO">Sending key(s) ('RETURN',) to id=mat-input-0 element.</msg>
+<msg timestamp="20221101 23:02:42.145" level="INFO">Pressing special key RETURN to element.</msg>
+<msg timestamp="20221101 23:02:42.145" level="INFO">Releasing special key RETURN.</msg>
+<status status="PASS" starttime="20221101 23:02:39.718" endtime="20221101 23:02:42.166"/>
+</kw>
+<kw name="Press Keys" library="SeleniumLibrary">
+<arg>id=mat-input-0</arg>
+<arg>RETURN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<msg timestamp="20221101 23:02:42.167" level="INFO">Sending key(s) ('RETURN',) to id=mat-input-0 element.</msg>
+<msg timestamp="20221101 23:02:47.619" level="INFO">Pressing special key RETURN to element.</msg>
+<msg timestamp="20221101 23:02:47.619" level="INFO">Releasing special key RETURN.</msg>
+<status status="PASS" starttime="20221101 23:02:42.166" endtime="20221101 23:02:47.625"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221101 23:02:49.626" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20221101 23:02:47.625" endtime="20221101 23:02:49.626"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>edit</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20221101 23:02:49.628" level="INFO">Clicking button 'edit'.</msg>
+<status status="PASS" starttime="20221101 23:02:49.627" endtime="20221101 23:02:49.762"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221101 23:02:51.762" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20221101 23:02:49.762" endtime="20221101 23:02:51.762"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>id=Group_1</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20221101 23:02:51.763" level="INFO">Clicking element 'id=Group_1'.</msg>
+<status status="PASS" starttime="20221101 23:02:51.763" endtime="20221101 23:02:51.818"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>id=mat-option-7</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20221101 23:02:51.819" level="INFO">Clicking element 'id=mat-option-7'.</msg>
+<status status="PASS" starttime="20221101 23:02:51.818" endtime="20221101 23:02:51.864"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221101 23:02:52.864" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20221101 23:02:51.864" endtime="20221101 23:02:52.864"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>Edit</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20221101 23:02:52.865" level="INFO">Clicking button 'Edit'.</msg>
+<status status="PASS" starttime="20221101 23:02:52.865" endtime="20221101 23:02:52.936"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221101 23:02:53.937" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20221101 23:02:52.936" endtime="20221101 23:02:53.937"/>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20221101 23:02:53.938" endtime="20221101 23:02:54.013"/>
+</kw>
+<status status="PASS" starttime="20221101 23:02:30.821" endtime="20221101 23:02:54.013"/>
+</kw>
+<kw name="turn Passcode On" library="Insulte_ios_app_resources">
+<kw name="open settings app" library="Insulte_ios_app_resources">
