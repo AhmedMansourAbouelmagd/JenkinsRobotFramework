@@ -110,7 +110,7 @@ Test Case 5
    [Tags]     APPDM IOS APP
 #   Run Keyword And Ignore Error    press ok when Device disconnected
 #   AppiumLibrary.Click Element          accessibility_id=FoundDeviceL
-   Reset Application
+   AppiumLibrary.Reset Application
    AppiumLibrary.wait until element is visible    accessibility_id=ActivationViewDeactivateBtn    40s
    AppiumLibrary.Click Element   accessibility_id=ActivationViewDeactivateBtn
    Run Keyword And Ignore Error    press ok when Device disconnected
