@@ -43,11 +43,28 @@ Test Case 4
    AppiumLibrary.Click Element   accessibility_id=ResetSDKBtn
    enable primary key from cloud app
    turn Passcode On
-
+Test Case 5
+   [Documentation]    Testing that TWISDK supports client authentications.
+   [Tags]     APPDM IOS APP
+   setup and open appdm app
+   AppiumLibrary.wait until element is visible  accessibility_id=RegisterMyPhoneBtn     20s
+   AppiumLibrary.Click Element   accessibility_id=RegisterMyPhoneBtn
+   AppiumLibrary.wait until element is visible    accessibility_id=ResetSDKBtn    180s
+#   get ios logs    USDRC
+#   AppiumLibrary.Click Element   accessibility_id=ResetSDKBtn
+Test Case 6
+   [Documentation]    Testing that TWISDK Clears the registration data to be able to register if updates occur.
+   [Tags]     APPDM IOS APP
+   AppiumLibrary.wait until element is visible    accessibility_id=ResetSDKBtn    90s
+   AppiumLibrary.Click Element   accessibility_id=ResetSDKBtn
+   AppiumLibrary.wait until element is visible    accessibility_id=RegisterMyPhoneBtn    30s
+   AppiumLibrary.Click Element   accessibility_id=RegisterMyPhoneBtn
+   AppiumLibrary.wait until element is visible    accessibility_id=ResetSDKBtn    90s
+   AppiumLibrary.Click Element   accessibility_id=ResetSDKBtn
 Test Case 7
     [Documentation]    Testing that PDM Id property is set after the App is registered.
    [Tags]     APPDM IOS APP
-   setup and open appdm app
+   AppiumLibrary.Launch Application
    AppiumLibrary.wait until element is visible  accessibility_id=PDMIdBtn
    AppiumLibrary.Click Element   accessibility_id=PDMIdBtn
    toggle bluetooth
@@ -137,26 +154,6 @@ Test case 12
    change the app bundle id on portal to com.twi3.appdm
    Sleep    5s
 
-Test Case 5
-   [Documentation]    Testing that TWISDK supports client authentications.
-   [Tags]     APPDM IOS APP
-   open settings app
-   setup and open appdm app
-   AppiumLibrary.wait until element is visible  accessibility_id=RegisterMyPhoneBtn     20s
-   AppiumLibrary.Click Element   accessibility_id=RegisterMyPhoneBtn
-   AppiumLibrary.wait until element is visible    accessibility_id=ResetSDKBtn    180s
-#   get ios logs    USDRC
-#   AppiumLibrary.Click Element   accessibility_id=ResetSDKBtn
-
-Test Case 6
-   [Documentation]    Testing that TWISDK Clears the registration data to be able to register if updates occur.
-   [Tags]     APPDM IOS APP
-   AppiumLibrary.wait until element is visible    accessibility_id=ResetSDKBtn    90s
-   AppiumLibrary.Click Element   accessibility_id=ResetSDKBtn
-   AppiumLibrary.wait until element is visible    accessibility_id=RegisterMyPhoneBtn    30s
-   AppiumLibrary.Click Element   accessibility_id=RegisterMyPhoneBtn
-   AppiumLibrary.wait until element is visible    accessibility_id=ResetSDKBtn    90s
-   AppiumLibrary.Click Element   accessibility_id=ResetSDKBtn
 
 #   AppiumLibrary.wait until element is visible    accessibility_id=ResetSDKBtn    20s
 #   AppiumLibrary.Click Element   accessibility_id=ResetSDKBtn
