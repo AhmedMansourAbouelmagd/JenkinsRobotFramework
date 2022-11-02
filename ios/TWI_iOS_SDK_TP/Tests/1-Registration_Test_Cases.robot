@@ -12,37 +12,37 @@ Test Case 1
    AppiumLibrary.page should contain element  accessibility_id=Validating your device
    AppiumLibrary.wait until element is visible    accessibility_id=ResetSDKBtn    90s
    AppiumLibrary.Click Element   accessibility_id=ResetSDKBtn
-Test Case 2
-   [Documentation]    Testing that the registration process will fail if there is no internet connection.
-   [Tags]     APPDM IOS APP
-   toggle wifi
-   AppiumLibrary.wait until element is visible  accessibility_id=RegisterMyPhoneBtn       10s
-   AppiumLibrary.Click Element   accessibility_id=RegisterMyPhoneBtn
-   AppiumLibrary.Wait Until Element Is Visible    accessibility_id=No Internet connection.       20s
-   AppiumLibrary.Click Element    accessibility_id=Ok
-   toggle wifi
-Test Case 3
-   [Documentation]    Testing that the phone doesn’t have a passcode and the cloud app requires the primary key.
-   [Tags]     APPDM IOS APP
-   turn Passcode Off
-   setup and open appdm app
-   AppiumLibrary.wait until element is visible  accessibility_id=RegisterMyPhoneBtn
-   AppiumLibrary.Click Element   accessibility_id=RegisterMyPhoneBtn
-   AppiumLibrary.wait until element is visible  accessibility_id=Biometry Id Not Enabled.    30s
-   AppiumLibrary.Click Element    accessibility_id=Ok
+#Test Case 2
+#   [Documentation]    Testing that the registration process will fail if there is no internet connection.
+#   [Tags]     APPDM IOS APP
+#   toggle wifi
+#   AppiumLibrary.wait until element is visible  accessibility_id=RegisterMyPhoneBtn       10s
+#   AppiumLibrary.Click Element   accessibility_id=RegisterMyPhoneBtn
+#   AppiumLibrary.Wait Until Element Is Visible    accessibility_id=No Internet connection.       20s
+#   AppiumLibrary.Click Element    accessibility_id=Ok
+#   toggle wifi
+#Test Case 3
+#   [Documentation]    Testing that the phone doesn’t have a passcode and the cloud app requires the primary key.
+#   [Tags]     APPDM IOS APP
+#   turn Passcode Off
+#   setup and open appdm app
+#   AppiumLibrary.wait until element is visible  accessibility_id=RegisterMyPhoneBtn
+#   AppiumLibrary.Click Element   accessibility_id=RegisterMyPhoneBtn
+#   AppiumLibrary.wait until element is visible  accessibility_id=Biometry Id Not Enabled.    30s
+#   AppiumLibrary.Click Element    accessibility_id=Ok
+##   turn Passcode On
+#Test Case 4
+#   [Documentation]    Testing that the user is able to register if it the phone doesn’t have a passcode and the cloud app doesn’t require the primary key.
+#   [Tags]     APPDM IOS APP
+##   The cloud app is preconfigured to disable the primary key feature.
+#   disable primary key from cloud app
+#   setup and open appdm app
+#   AppiumLibrary.wait until element is visible  accessibility_id=RegisterMyPhoneBtn      10s
+#   AppiumLibrary.Click Element   accessibility_id=RegisterMyPhoneBtn
+#   AppiumLibrary.wait until element is visible    accessibility_id=ResetSDKBtn    90s
+#   AppiumLibrary.Click Element   accessibility_id=ResetSDKBtn
+#   enable primary key from cloud app
 #   turn Passcode On
-Test Case 4
-   [Documentation]    Testing that the user is able to register if it the phone doesn’t have a passcode and the cloud app doesn’t require the primary key.
-   [Tags]     APPDM IOS APP
-#   The cloud app is preconfigured to disable the primary key feature.
-   disable primary key from cloud app
-   setup and open appdm app
-   AppiumLibrary.wait until element is visible  accessibility_id=RegisterMyPhoneBtn      10s
-   AppiumLibrary.Click Element   accessibility_id=RegisterMyPhoneBtn
-   AppiumLibrary.wait until element is visible    accessibility_id=ResetSDKBtn    90s
-   AppiumLibrary.Click Element   accessibility_id=ResetSDKBtn
-   enable primary key from cloud app
-   turn Passcode On
 #Test Case 5
 #   [Documentation]    Testing that TWISDK supports client authentications.
 #   [Tags]     APPDM IOS APP
