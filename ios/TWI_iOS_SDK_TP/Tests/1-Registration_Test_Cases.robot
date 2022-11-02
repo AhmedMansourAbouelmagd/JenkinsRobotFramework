@@ -135,11 +135,12 @@ Test case 12
    AppiumLibrary.Wait Until Element Is Visible    accessibility_id=Device Registration failed. status:2       20s
    AppiumLibrary.Click Element    accessibility_id=Ok
    change the app bundle id on portal to com.twi3.appdm
-   Sleep    1s
+   Sleep    5s
 
 Test Case 5
    [Documentation]    Testing that TWISDK supports client authentications.
    [Tags]     APPDM IOS APP
+   open settings app
    setup and open appdm app
    AppiumLibrary.wait until element is visible  accessibility_id=RegisterMyPhoneBtn     20s
    AppiumLibrary.Click Element   accessibility_id=RegisterMyPhoneBtn
