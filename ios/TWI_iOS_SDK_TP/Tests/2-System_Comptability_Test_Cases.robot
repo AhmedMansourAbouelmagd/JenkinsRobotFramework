@@ -1,8 +1,8 @@
 *** Settings ***
 Resource        ../resources/Insulte_ios_app_resources.robot
 
-#Suite Setup    clear everything on the device after deactivation
-Suite Setup                initializing everything before start
+Suite Setup    clear everything on the device after deactivation
+#Suite Setup                initializing everything before start
 
 #Suite Setup     Run Keywords        initializing everything before start
 

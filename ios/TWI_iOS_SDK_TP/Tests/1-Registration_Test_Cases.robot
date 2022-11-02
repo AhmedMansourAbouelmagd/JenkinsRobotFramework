@@ -138,7 +138,7 @@ Test case 12
    [Tags]     APPDM IOS APP
 #   Launch Application
    setup and open appdm app
-   Run Keyword And Ignore Error    press ok when Device disconnected
+#   Run Keyword And Ignore Error    press ok when Device disconnected
    AppiumLibrary.wait until element is visible    accessibility_id=ResetSDKBtn    20s
    AppiumLibrary.Click Element   accessibility_id=ResetSDKBtn
 #   for clear caches
