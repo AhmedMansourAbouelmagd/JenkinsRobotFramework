@@ -1,10 +1,11 @@
 *** Settings ***
 Resource    ../resources/TestData.robot
 Resource    ../resources/TWI_Serial_library.robot
-Library     AppiumLibrary
+Library     AppiumLibrary      run_on_failure=AppiumLibrary.CapturePageScreenshot
 Resource        ../resources/resource.robot
 Library   WebSocketClient
-Library         SeleniumLibrary
+Library         SeleniumLibrary     run_on_failure=SeleniumLibrary.CapturePageScreenshot
+
 
 
 *** Variables ***
