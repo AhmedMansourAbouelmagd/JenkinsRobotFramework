@@ -304,7 +304,8 @@ change the app bundle id on portal to com.twi3.appdm
    SeleniumLibrary.Input Text    id=mat-input-3    text=com.twi3.appdm
    Sleep    1s
    SeleniumLibrary.Click Button      Edit
-
+   Sleep    1
+   Close Browser
 
 Set HIGH
     [Arguments]     ${Port Number}     ${portNum}    ${pinNum}
