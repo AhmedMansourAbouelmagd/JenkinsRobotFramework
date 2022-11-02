@@ -47,7 +47,7 @@ Test Case 4
 Test Case 7
     [Documentation]    Testing that PDM Id property is set after the App is registered.
    [Tags]     APPDM IOS APP
-   AppiumLibrary.Launch Application
+   setup and open appdm app
    AppiumLibrary.wait until element is visible  accessibility_id=PDMIdBtn
    AppiumLibrary.Click Element   accessibility_id=PDMIdBtn
    toggle bluetooth
