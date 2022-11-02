@@ -1,7 +1,7 @@
 *** Settings ***
 Resource        ../resources/Insulte_ios_app_resources.robot
 
-Suite Setup    initializing everything before start
+#Suite Setup    initializing everything before start
 #Suite Teardown
 *** Test Cases ***
 Test Case 1
