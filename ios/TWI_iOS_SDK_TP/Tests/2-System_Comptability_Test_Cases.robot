@@ -103,17 +103,17 @@ Test Case 6
    AppiumLibrary.Click Element   accessibility_id=ActivationViewCustomActionsBtn
    click on get pod activation status
    AppiumLibrary.Wait Until Page Contains    Total Full Pulses    40s
-   Sleep    1s
+   Sleep    4s
 
-Test Case 5
-   [Documentation]    Testing that the deactivation process is successful.
-   [Tags]     APPDM IOS APP
+#Test Case 5
+#   [Documentation]    Testing that the deactivation process is successful.
+#   [Tags]     APPDM IOS APP
+##   Run Keyword And Ignore Error    press ok when Device disconnected
+##   AppiumLibrary.Click Element          accessibility_id=FoundDeviceL
+#   AppiumLibrary.Reset Application
+#   AppiumLibrary.wait until element is visible    accessibility_id=ActivationViewDeactivateBtn    40s
+#   AppiumLibrary.Click Element   accessibility_id=ActivationViewDeactivateBtn
 #   Run Keyword And Ignore Error    press ok when Device disconnected
-#   AppiumLibrary.Click Element          accessibility_id=FoundDeviceL
-   AppiumLibrary.Reset Application
-   AppiumLibrary.wait until element is visible    accessibility_id=ActivationViewDeactivateBtn    40s
-   AppiumLibrary.Click Element   accessibility_id=ActivationViewDeactivateBtn
-   Run Keyword And Ignore Error    press ok when Device disconnected
 
 
 #   AppiumLibrary.wait until element is visible    accessibility_id=ScanBtn    40s
