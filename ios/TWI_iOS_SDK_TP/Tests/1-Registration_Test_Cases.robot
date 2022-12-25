@@ -98,29 +98,7 @@ Test Case 9
    turn Passcode On
    setup and open appdm app
    AppiumLibrary.wait until element is visible    accessibility_id=ResetSDKBtn    90s
-Test case 10
-   [Documentation]       Testing that Attestation with Play Integrity device is working properly after registration.
-   [Tags]     APPDM IOS APP
-   setup and open appdm app
-   AppiumLibrary.wait until element is visible    accessibility_id=AssertDataBtn    20s
-   AppiumLibrary.Click Element   accessibility_id=AssertDataBtn
-   Sleep    2s
-   open notification
-   AppiumLibrary.Wait Until Page Contains      The result of data assertion is:     30s
-   sleep      1
-   open settings app
-Test case 11
-   [Documentation]           Testing Attestation after turning wifi off.
-   [Tags]     APPDM IOS APP
-   setup and open appdm app
-   toggle wifi
-   AppiumLibrary.wait until element is visible    accessibility_id=AssertDataBtn    20s
-   AppiumLibrary.Click Element   accessibility_id=AssertDataBtn
-   Sleep     1s
-   open notification
-   AppiumLibrary.Wait Until Page Contains      The result of data assertion is:      30s
-   toggle wifi
-   open settings app
+
 
 
 
