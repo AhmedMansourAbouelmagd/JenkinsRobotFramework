@@ -31,7 +31,6 @@ Test Case 3
    AppiumLibrary.wait until element is visible  accessibility_id=Biometry Id Not Enabled.    30s
    AppiumLibrary.Click Element    accessibility_id=Ok
    turn Passcode On
-
 Test Case 5
    [Documentation]    Testing that TWISDK supports client authentications.
    [Tags]     APPDM IOS APP
