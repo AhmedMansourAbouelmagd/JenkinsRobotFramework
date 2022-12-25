@@ -5,7 +5,7 @@
 
 *** Variables ***
 ${DIR}
-${Port Number}     /dev/tty.usbmodem0006821328461
+${Port Number}     /dev/tty.usbmodem0006820316101
 ${Buad Rate}       115200
 ${Encoding}        hexlify
 ${Time out}        10
