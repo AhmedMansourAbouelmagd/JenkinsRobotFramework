@@ -30,19 +30,8 @@ Test Case 3
    AppiumLibrary.Click Element   accessibility_id=RegisterMyPhoneBtn
    AppiumLibrary.wait until element is visible  accessibility_id=Biometry Id Not Enabled.    30s
    AppiumLibrary.Click Element    accessibility_id=Ok
-#   turn Passcode On
-Test Case 4
-   [Documentation]    Testing that the user is able to register if it the phone doesn’t have a passcode and the cloud app doesn’t require the primary key.
-   [Tags]     APPDM IOS APP
-#   The cloud app is preconfigured to disable the primary key feature.
-   disable primary key from cloud app
-   setup and open appdm app
-   AppiumLibrary.wait until element is visible  accessibility_id=RegisterMyPhoneBtn      10s
-   AppiumLibrary.Click Element   accessibility_id=RegisterMyPhoneBtn
-   AppiumLibrary.wait until element is visible    accessibility_id=ResetSDKBtn    90s
-   AppiumLibrary.Click Element   accessibility_id=ResetSDKBtn
-   enable primary key from cloud app
    turn Passcode On
+
 Test Case 5
    [Documentation]    Testing that TWISDK supports client authentications.
    [Tags]     APPDM IOS APP
@@ -133,30 +122,7 @@ Test case 11
    AppiumLibrary.Wait Until Page Contains      The result of data assertion is:      30s
    toggle wifi
    open settings app
-Test case 12
-   [Documentation]          Test registration with wrong bundle id on portal.
-   [Tags]     APPDM IOS APP
-#   Launch Application
-   setup and open appdm app
-#   Run Keyword And Ignore Error    press ok when Device disconnected
-   AppiumLibrary.wait until element is visible    accessibility_id=ResetSDKBtn    20s
-   AppiumLibrary.Click Element   accessibility_id=ResetSDKBtn
-#   for clear caches
-   Run Keyword And Ignore Error    press ok when Device disconnected
-   AppiumLibrary.wait until element is visible    accessibility_id=ResetSDKBtn    20s
-   AppiumLibrary.Click Element   accessibility_id=ResetSDKBtn
 
-   change the app bundle id on portal to khaled
-   AppiumLibrary.wait until element is visible  accessibility_id=RegisterMyPhoneBtn       10s
-   AppiumLibrary.Click Element   accessibility_id=RegisterMyPhoneBtn
-   AppiumLibrary.Wait Until Element Is Visible    accessibility_id=Device Registration failed. status:2       20s
-   AppiumLibrary.Click Element    accessibility_id=Ok
-   change the app bundle id on portal to com.twi3.appdm
-   Sleep    5s
-
-
-#   AppiumLibrary.wait until element is visible    accessibility_id=ResetSDKBtn    20s
-#   AppiumLibrary.Click Element   accessibility_id=ResetSDKBtn
 
 
 
